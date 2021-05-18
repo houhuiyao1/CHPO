@@ -1,0 +1,56 @@
+<!-- 未授权 -->
+<block wx:if="{{!userInfo.nickName}}">
+<view class="contain" style="background:url(../../images/src=http_%2F%2Fwww.heiguang.com%2Fuploadfile%2F2016%2F0705%2F20160705094125264.jpg&refer=http_%2F%2Fwww.heiguang.jfif)"
+wx:if="{{!userInfo.nickName}}">
+</view>
+<button bindtap="getUserinfo">
+    登录
+  </button>
+</block>
+
+<!-- 授权登录后 -->
+<view class="contain" style="background:url(../../images/src=http_%2F%2Fwww.heiguang.com%2Fuploadfile%2F2016%2F0705%2F20160705094125264.jpg&refer=http_%2F%2Fwww.heiguang.jfif)"
+wx:if="{{userInfo.nickName}}">
+  <view class="follow simg">
+    <image src="../../images/icon/follow(1).png"></image>
+  </view>
+      <view class="pn" >
+      <view class="headphoto"><image src="{{userInfo.avatarUrl}}"></image></view>
+      <view class="nickName">{{userInfo.nickName}}</view>
+      </view> 
+      <image src="../../images/icon/email.png" class="talk"></image>
+
+</view>
+
+<block wx:if="{{!moreUserinfo.status}}">
+<view class="write" bindtap="goLogin" wx:if="{{userInfo.nickName}}">完善资料，让更多人关注你<image src="../../images/icon/write.png"></image></view>
+</block>
+
+<block wx:if="{{moreUserinfo.status}}">
+<view class="write" bindtap="goLogin">{{moreUserinfo.status}} · {{moreUserinfo.school}}</view>
+<view class="introduce" bindtap="goLogin">{{moreUserinfo.introduce}}</view>
+</block>
+
+<view class="Item">
+  <view class="itemList"><view>34</view><view>关注</view></view>
+  <view class="itemList"><view>19</view><view>点赞</view></view>
+  <view class="itemList"><view>0</view><view>关注者</view></view>
+</view>
+
+<view class="footer">
+  <view class="chek">
+    <view class="dongtailist">动态</view>
+    <view class="yuepailist">约拍</view>
+  </view>
+
+  <swiper class="photobox">
+  <swiper-item class="dongtai">
+      <mineList myList="{{myList}}"/>
+  </swiper-item>
+  <swiper-item class="yuepai">
+    
+  </swiper-item>
+</swiper>
+</view>
+
+

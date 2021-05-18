@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mphoto/mphoto",
+    "pages/message/message",
+    "pages/me/me",
+    "pages/login/login",
+    "pages/fabu/fabu",
+    "pages/indexDetail/indexDetail",
+    "pages/appiontmentDetail/appiontmentDetail",
+    "pages/messageDetail/messageDetail",
+    "pages/user/user"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2CD18A",
+    "navigationBarTitleText": "校园约拍",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/icon/home.png",
+        "selectedIconPath": "/images/icon/home1.png"
+      },
+      {
+        "pagePath": "pages/mphoto/mphoto",
+        "text": "约拍",
+        "iconPath": "/images/icon/mphoto.png",
+        "selectedIconPath": "/images/icon/mphoto1.png"
+      },
+      {
+        "pagePath": "pages/fabu/fabu",
+        "text": "发布",
+        "iconPath": "/images/icon/myphoto.png",
+        "selectedIconPath": "/images/icon/myphoto.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "iconPath": "/images/icon/message.png",
+        "selectedIconPath": "/images/icon/message1.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "/images/icon/me.png",
+        "selectedIconPath": "/images/icon/me1.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

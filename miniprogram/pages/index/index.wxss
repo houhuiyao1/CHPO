@@ -1,0 +1,24 @@
+page{
+  background-color: white;
+}
+
+.found{
+  overflow: hidden;
+  margin: 40rpx 40rpx 0 40rpx;
+}
+
+.foundText{
+  float: left;
+  font-size: 46rpx;
+  font-weight: 700;
+}
+
+.foundIcon{
+  float: right;
+}
+
+.BOX{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

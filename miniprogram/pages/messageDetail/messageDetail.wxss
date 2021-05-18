@@ -1,0 +1,128 @@
+page{
+  background-color: white;
+}
+
+.top{
+  margin-top: 40rpx;
+  width: 100vw;
+  height: 120rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx rgb(243, 243, 243) solid;
+}
+
+.flur{
+  background-color: #9afacf;
+  width: 70vw;
+  height: 100rpx;
+  position: absolute;
+  top: 0;
+  left: 15vw;
+  z-index: -1;
+  filter: blur(120rpx);
+}
+
+.back{
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.return{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.head{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 20rpx;
+}
+
+.nickName{
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nickName .detail{
+  font-size: 24rpx;
+  color: rgb(190, 189, 189);
+}
+
+.center{
+  height: calc(100vh - 240rpx - 55rpx);
+}
+
+.bottom{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 120rpx;
+  background-color: white;
+}
+
+.set{
+  width: 80vw;
+  height: 55rpx;
+  border-radius: 15rpx;
+  background-color: #eef0f7;
+  padding: 0 8rpx;
+}
+
+.add{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  border: 2rpx #DCE0E8 solid;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.mess{
+  overflow: hidden;
+  clear: both;
+  width: 70vw;
+  margin: 10rpx 30rpx;
+}
+
+.rightBox{
+  float: right;
+}
+
+.leftBox{
+  float: left;
+}
+
+.right{
+  float: right;
+  background-color: rgb(241, 250, 241);
+}
+
+.left{
+  float: left;
+  background-color: #2CD18A;
+  color: white;
+}
+
+.message{
+  padding: 20rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+}
+

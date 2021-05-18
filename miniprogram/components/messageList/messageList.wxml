@@ -1,0 +1,4 @@
+<block wx:for="{{messageUserList}}" wx:key="index">
+  <image src="{{item.avatarUrl}}"></image>
+  <view>{{item.nickName}}</view>
+</block>

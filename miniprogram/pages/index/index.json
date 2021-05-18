@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "homeList":"/components/homeList/homeList"
+  },
+  "navigationBarTitleText": "首页",
+    "enablePullDownRefresh": true
+}

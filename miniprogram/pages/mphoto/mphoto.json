@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "photoList":"/components/photoList/photoList",
+    "schoolPhotoList":"/components/schoolPhotoList/schoolPhotoList"
+  },
+  "navigationBarTitleText": "约拍",
+  "enablePullDownRefresh": true
+}

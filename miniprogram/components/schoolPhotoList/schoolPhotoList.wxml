@@ -1,0 +1,7 @@
+<view class="container">
+    <image src="{{schoollist[index].img[0]}}" class="img" mode="widthFix"></image>
+  <view class="bottom">
+    <view class="icon"><image src="{{schoollikeArr[index]?likeUrl:nolikeUrl}}" class="image"></image><view>{{schoollikeCount[index]}}</view></view>
+    <view class="icon"><image src="../../images/icon/talk.png" class="image"></image><view>{{schoolcommentCount[index]}}</view></view>
+  </view>
+</view>

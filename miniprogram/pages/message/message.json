@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "messageList":"/components/messageList/messageList"
+  },
+  "navigationBarTitleText": "我的消息",
+    "enablePullDownRefresh": true
+}

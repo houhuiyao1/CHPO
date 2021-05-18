@@ -1,0 +1,34 @@
+<view class="top" >
+  <view class="headphoto"><image src="{{userInfo.photo}}"></image></view>
+  <view class="nickName">{{userInfo.nickName}}</view>
+</view>
+
+<view class="information">
+  <view class="title">选择身份</view>
+  <view class="section">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      <view class="select">{{status}}</view>
+    </view>
+  </picker>
+</view>
+
+  <view class="title">所读高校</view>
+  <view class="section">
+    <input type="text" class="select" bindinput="getschool"></input>
+  <!-- <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">
+      <view class="select">{{multiArray[0][multiIndex[0]]}}{{multiArray[1][multiIndex[1]]}}{{multiArray[2][multiIndex[2]]}}</view>
+    </view>
+  </picker> -->
+</view>
+
+  <view class="title">说一句话介绍一下自己吧</view>
+  <view class="bottom">
+    <textarea name="" id="" cols="30" rows="10" class="introduce" bindinput="getintroduce" maxlength="20" ></textarea>
+    <view class="textNum">{{length}}/20</view>
+  </view>
+  
+  <view class="finish" size="default" bindtap="finish">完成</view>
+
+</view>

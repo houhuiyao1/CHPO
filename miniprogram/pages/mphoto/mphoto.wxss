@@ -1,0 +1,120 @@
+page{
+  background-color: white;
+}
+
+.search{
+  width: 90vw;
+  height: 70rpx;
+  margin: 20rpx auto;
+  border: 2rpx rgb(231, 227, 227) solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15rpx;
+  border-radius: 10rpx;
+  box-shadow: 2rpx -2rpx 15px 1rpx rgb(240, 238, 238),
+              -2rpx 2rpx 15px 1rpx rgb(240, 238, 238),
+              2rpx 2rpx 15px 1rpx rgb(240, 238, 238),
+              2rpx 2rpx 15px 1rpx rgb(240, 238, 238);
+}
+
+.search-text{
+  color: rgb(172, 166, 166);
+}
+
+.tabbar{
+  display: flex;
+}
+
+.tabbar .tabbarItem{
+  margin: 10rpx;
+  padding: 10rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dec{
+  width: 25rpx;
+  height: 5rpx;
+  background-color: #2CD18A;
+  margin: 5rpx;
+}
+
+.photobox{
+  width: 100vw;
+  height: 100vh;
+}
+
+.box{
+  height: 170rpx;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  margin-left: 10rpx;
+}
+
+.photograth{
+  margin-left: 20rpx;
+  position: relative;
+  line-height: 40rpx;
+}
+
+.photograthList{
+  margin: 0 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headphoto image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 20rpx;
+}
+
+.name{
+  font-size: 24rpx;
+}
+
+.photoBox{
+  box-sizing: border-box;
+  height: calc(100vh - 250rpx);
+  background-color: whitesmoke;
+  display: flex;
+}
+
+
+.together{
+  display: flex;
+  flex-direction: column;
+  margin-left: 4vw;
+}
+
+.gophoto{
+  margin:8rpx 20rpx;
+  font-size: 25rpx
+}
+
+.list{
+  margin: 10rpx 20rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.col{
+  height: 35rpx;
+  width: 8rpx;
+  background-color: #2CD18A;
+  position: absolute;
+  left: -20rpx;
+  top: 6rpx;
+}
+
+
+
+
+

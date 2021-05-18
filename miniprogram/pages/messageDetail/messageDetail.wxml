@@ -1,0 +1,29 @@
+<view class="top">
+  <view class="flur"></view>
+  <view class="back" bindtap="back"><image src="../../images/icon/return.png" class="return"></image></view>
+  <image src="{{leftUserinfo.avatarUrl}}" class="head"></image>
+  <view class="nickName">
+    <view>{{leftUserinfo.nickName}}</view>
+    <view class="detail">{{leftUserinfo.status}} · {{leftUserinfo.school}}</view>
+  </view>
+</view>
+
+<scroll-view class="center" scroll-y="true">
+<block wx:for="{{messageList}}" wx:key="index">
+  <view class="rightBox mess">
+    <text wx:if="{{item.openId === openId}}" class="right message">{{item.content}}</text>
+  </view>
+  <view class="leftBox mess">
+    <text wx:if="{{item.openId === userId}}" class="left message">{{item.content}}</text>
+  </view>
+</block>
+</scroll-view>
+
+<view class="bottom">
+  <input type="text" 
+  class="set"
+  confirm-type="发送"
+  bindconfirm='send'
+  value="{{content}}"></input>
+  <view class="add"><image src="../../images/icon/add.png"></image></view>
+</view>

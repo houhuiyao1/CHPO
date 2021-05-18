@@ -1,0 +1,28 @@
+<view class="container" wx:for="{{appiontmentList}}" wx:key="_id" bindtap="goDetail" data-index="{{index}}">
+  <swiper class="photo" 
+  indicator-dots="true"
+  indicator-color="white"
+  indicator-active-color="#2CD18A"
+  circular="true">
+    <!-- <image src="{{item}}" class="image"></image> -->
+      <swiper-item wx:for="{{appiontmentList[index].img}}" wx:key="*this">
+        <image src="{{item}}" class="image"></image>
+      </swiper-item>
+  </swiper>
+
+  <view class="bottom">
+  <view class="bottom-left">
+    <image class="head-photo" src="{{item.userInfo.avatarUrl}}"></image>
+    <view class="name">{{item.userInfo.nickName}}</view>
+  </view>
+  <view class="time">{{appiontmentList[index].createTime}}</view>
+</view>
+
+<view class="content">{{appiontmentList[index].content}}</view>
+
+  <view class="bottom-right">
+    <view class="icon"  data-index="{{index}}"><image src="{{likeArr[index]?likeUrl:nolikeUrl}}"></image><view class="text">{{likeArrcount[index]}}</view></view>
+    <view class="icon"><image src="../../images/icon/talk.png"></image><view class="text">{{appiontmentList[index].comment.length}}</view></view>
+    <!-- <view class="icon"><image src="../../images/icon/send1.png"></image></view> -->
+  </view>
+</view>

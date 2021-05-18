@@ -1,0 +1,80 @@
+page{
+  background-color: white;
+}
+
+.top{
+  width: 100vw;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headphoto image{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+}
+
+.information{
+  width: 100vw;
+  height: calc(100vh - 400rpx);
+  padding: 25rpx;
+  background-color: #F9FAFC;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.information .title{
+  width: 85vw;
+  font-size: 26rpx;
+  margin-bottom: 10rpx;
+  margin-top: 20rpx;
+}
+
+.section{
+  width: 85vw;
+  height: 70rpx;
+  background-color: white;
+  box-shadow: 2rpx 2rpx 10rpx 3rpx rgb(236, 236, 236);
+  padding-left: 10rpx;          
+}
+
+.section .select{
+  width: 85vw;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+}
+
+.bottom{
+  position: relative;
+}
+
+.introduce{
+  width: 85vw;
+  background-color: white;
+  padding: 10rpx;
+  box-shadow: 2rpx 2rpx 10rpx 3rpx rgb(236, 236, 236);
+}
+
+.textNum{
+  position: absolute;
+  bottom: 5rpx;
+  right: 5rpx;
+  color: #cdcfd1;
+}
+
+.finish{
+  margin-top: 30rpx;
+  width: 160rpx;
+  height: 80rpx;
+  background-color: rgb(223, 236, 236);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15rpx;
+}

@@ -1,0 +1,14 @@
+<view class="found">
+  <view class="foundText">Found</view>
+  <icon type="search" size="30" color="#353B50" class="foundIcon"></icon>
+</view>
+
+<view class="BOX">
+  <homeList 
+  appiontmentList = "{{appiontmentList}}"
+  likeCount="{{likeCount}}"
+  commentCount="{{commentCount}}"
+  likeArr="{{likeArr}}"
+  likeArrcount="{{likeArrcount}}"
+  ></homeList>
+</view>

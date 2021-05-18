@@ -1,0 +1,125 @@
+page{
+  background-color: white;
+}
+
+.contain{
+  width: 100vw;
+  height: 350rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.headphoto{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headphoto image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.pn{
+  position: absolute;
+  left: 50%;
+  bottom: -110rpx;
+  transform: translate(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.simg{
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  background-color: #2CD18A;
+  border-radius: 50%;
+}
+
+.follow{
+  left: 120rpx;
+  bottom: -40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2rpx 2rpx 5rpx 3rpx rgb(223, 222, 222);
+}
+
+.follow image{
+  width: 60%;
+  height: 60%;
+}
+
+.talk{
+  background-color: white;
+  border-radius: 50%;
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  right: 120rpx;
+  bottom: -40rpx;
+}
+
+.write{
+  margin-top: 130rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.write image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.introduce{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  margin-top: 5rpx;
+}
+
+.Item{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 40rpx 0;
+}
+
+.itemList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chek{
+  display: flex;
+  justify-content: space-around;
+  padding: 30rpx 0;
+  border-top: 2rpx rgb(230, 228, 228) solid;
+}
+
+.photobox{
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+}
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+

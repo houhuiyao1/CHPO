@@ -1,0 +1,49 @@
+<view class="container">
+  <textarea 
+  name="" placeholder="请输入内容..." 
+  class="textarea" 
+  bindinput="getContent" 
+  maxlength="150">
+</textarea>
+
+  <!-- 显示图片 -->
+  <block wx:for="{{imageList}}" wx:key="*this">
+    <view class="image">
+        <image src="{{item}}" 
+        mode="aspectFill" 
+        class="mainImage" 
+        bindtap="previewImage" 
+        data-imagesrc="{{item}}"></image>
+        
+        <image src="../../images/icon/delect.png" 
+        class="delect" 
+        bindtap="delectImage"
+        data-index="{{index}}"></image>
+    </view>
+  </block>
+
+  <view class="addimage" bindtap="addImage" hidden="{{selectImage}}">
+    <image src="../../images/icon/add.png" ></image>
+  </view>
+
+  <view class="textNums">{{textNums}}/150</view>
+</view>
+
+<view class="select">
+  <view class="button {{tag?'active':''}}" bindtap="dongtai">动态</view>
+  <view class="button {{!tag?'active':''}}" bindtap="yuepai">约拍</view>
+</view>
+
+<button class="button fabu" bindtap="addContent" disabled="{{check}}" style="width:240rpx;margin-right: 15rpx;">发布</button>
+
+<view class="title">选择标签</view>
+
+<view class="labelBox">
+  <view
+  class="label {{item.tag==true?'active':''}}" 
+  bindtap="getlabel" 
+  data-item="{{item.name}}"
+  data-index="{{index}}"
+  wx:for="{{labelList}}"
+  wx:key="index">{{item.name}}</view>
+</view>

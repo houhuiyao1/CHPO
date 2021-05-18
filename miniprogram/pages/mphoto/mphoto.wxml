@@ -1,0 +1,117 @@
+<view class="search">
+  <view class="search-text">搜索</view>
+  <icon type="search" size="30" color="" class="foundIcon"></icon>
+</view>
+
+<view class="tabbar">
+  <block wx:for="{{check}}" wx:key="*this">
+    <view class="tabbarItem"
+    data-index="{{index}}" 
+    bindtap="change"
+    >{{item}}
+    <view data-index="{{index}}" 
+    data-num="{{currentIndex}}" 
+    class="{{index == currentIndex?'dec':''}}"></view>
+  </view>
+  </block>
+</view>
+
+
+<swiper class="photobox" current="{{currentIndex}}">
+  <swiper-item class="hot">
+    <view class="photograth">
+      <view class="col"></view>
+      摄影师
+    </view>
+
+    <scroll-view class="box" scroll-x="true" enable-flex="true" wx:if="{{photograph.length !== 0}}">
+    
+      <block wx:for="{{photograph}}" wx:key="_id">
+        <view class="photograthList"  data-userId ="{{item.openid}}" bindtap="userDetail">
+        <view class="headphoto"><image src="{{photograph[index].avatarUrl}}"></image></view>
+        <view class="name">{{photograph[index].nickName}}</view>
+      </view>
+      </block>
+
+    </scroll-view>
+
+    <view  wx:if="{{photograph.length == 0}}" class="gophoto">快去成为第一位摄影师吧！</view>
+    
+    <view class="list">
+      <view class="col"></view>
+      约拍列表
+    </view>
+
+    <scroll-view class="photoBox" scroll-y="true" enable-flex="true">
+        <view class="left together">
+          <block wx:for="{{list}}" wx:if="{{index%2 == 0}}" wx:key="_id">
+            <photoList list = "{{list}}" 
+            index="{{index}}" 
+            bindtap="goDetail" 
+            data-id="{{list[index]._id}}"
+            likeArr="{{likeArr}}"
+            likeCount="{{likeCount}}"
+            commentCount="{{commentCount}}"/>
+          </block>
+        </view>
+        <view class="right together">
+          <block wx:for="{{list}}" wx:if="{{index%2 !== 0}}" wx:key="_id">
+            <photoList list = "{{list}}" 
+            index="{{index}}" 
+            bindtap="goDetail" 
+            data-id="{{list[index]._id}}"
+            likeArr="{{likeArr}}"
+            likeCount="{{likeCount}}"
+            commentCount="{{commentCount}}"/>
+          </block>
+        </view>
+    </scroll-view>
+
+  </swiper-item>
+  <swiper-item class="close">
+    <view class="photograth">
+      <view class="col"></view>
+      摄影师
+    </view>
+
+    <scroll-view class="box" scroll-x="true" enable-flex="true" wx:if="{{photograph.length !== 0}}">
+      <block wx:for="{{photograph}}" wx:key="_id">
+    <view class="photograthList" >
+        <view class="headphoto"><image src="{{schoolPhotograph[index].avatarUrl}}"></image></view>
+        <view class="name">{{schoolPhotograph[index].nickName}}</view>
+    </view>
+  </block>
+    </scroll-view>
+
+    <view  wx:if="{{photograph.length == 0}}" class="gophoto">快去成为第一位摄影师吧！</view>
+    
+    <view class="list">
+      <view class="col"></view>
+      约拍列表
+    </view>
+     <scroll-view class="photoBox" scroll-y="true" enable-flex="true">
+        <view class="left together">
+          <block wx:for="{{schoollist}}" wx:if="{{index%2 == 0}}" wx:key="_id">
+            <schoolPhotoList schoollist = "{{schoollist}}" 
+            index="{{index}}" 
+            bindtap="goDetail" 
+            data-id="{{list[index]._id}}"
+            schoollikeArr="{{schoollikeArr}}"
+            schoollikeCount="{{schoollikeCount}}"
+            schoolcommentCount="{{schoolcommentCount}}"/>
+          </block>
+        </view>
+        <view class="right together">
+          <block wx:for="{{schoollist}}" wx:if="{{index%2 !== 0}}" wx:key="_id">
+            <schoolPhotoList schoollist = "{{schoollist}}" 
+            index="{{index}}" 
+            bindtap="goDetail" 
+            data-id="{{schoollist[index]._id}}"
+            schoollikeArr="{{schoollikeArr}}"
+            schoollikeCount="{{schoollikeCount}}"
+            schoolcommentCount="{{schoolcommentCount}}"/>
+          </block>
+        </view>
+    </scroll-view>
+  </swiper-item>
+</swiper>
