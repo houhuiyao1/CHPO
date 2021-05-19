@@ -32,6 +32,12 @@ Page({
     })
   },
   
+  //查看关注用户列表
+  goFollowList(e){
+    console.log(e.currentTarget.dataset.follow);
+    
+  },
+
   getUserinfo(e){
   wx.getUserProfile({
     desc: '获取用户信息',
