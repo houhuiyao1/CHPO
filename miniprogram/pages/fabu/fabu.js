@@ -115,6 +115,7 @@ Page({
       return
     }
 
+    label = []
     for(let it of this.data.labelList){
       it.tag === true?label.push(it.name):""
     }

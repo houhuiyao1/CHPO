@@ -31,3 +31,25 @@
   width: 35rpx;
   height: 35rpx;
 }
+
+.labelBox{
+  display: flex;
+  clear: both;
+  position: absolute;
+  top: 10rpx;
+  left: 0;
+  width: 100%;
+}
+
+.label{
+  width: 70rpx;
+  height: 30rpx;
+  font-size: 18rpx;
+  background-color: #2CD18A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 20rpx;
+  margin-left: 8rpx;
+}

@@ -111,6 +111,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
+    
     userInfo = wx.getStorageSync('userInfo')
     moreUserinfo = wx.getStorageSync('moreUserinfo')
     openId = wx.getStorageSync('openId')
@@ -136,7 +138,7 @@ Page({
     })
     .watch({
       onChange: (snapshot)=> {
-        console.log( snapshot.docs[0].Message)
+
         this.setData({
           messageList:snapshot.docs[0].Message
         })

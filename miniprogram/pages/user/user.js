@@ -123,7 +123,8 @@ Page({
     })
     .get()
     .then(res =>{
-
+      console.log(res);
+      
       if(res.data[0].follow.indexOf(userId) < 0){
         this.setData({
           followArr:res.data[0].follow,

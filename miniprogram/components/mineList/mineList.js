@@ -7,6 +7,10 @@ Component({
     myList:{
       type:Array,
       value:[]
+    },
+    rightList:{
+      type:Array,
+      value:[]
     }
   },
 
@@ -21,6 +25,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    app(e){
+      wx.navigateTo({
+        url: `/pages/indexDetail/indexDetail?id=${e.currentTarget.dataset.id}`,
+      })
+    },
 
+    act(e){
+      wx.navigateTo({
+        url: `/pages/appiontmentDetail/appiontmentDetail?id=${e.currentTarget.dataset.id}`,
+      })
+    }
   }
 })

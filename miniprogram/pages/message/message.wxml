@@ -1,1 +1,1 @@
-<messageList messageUserList = "{{messageUserList}}"/>
+<messageList messageUserList = "{{messageUserList}}" lastMessage = "{{lastMessage}}"/>

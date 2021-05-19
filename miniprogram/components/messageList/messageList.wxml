@@ -1,4 +1,9 @@
-<block wx:for="{{messageUserList}}" wx:key="index">
-  <image src="{{item.avatarUrl}}"></image>
-  <view>{{item.nickName}}</view>
-</block>
+<view wx:for="{{messageUserList}}" wx:key="index" class="list" data-userId = "{{item.openid}}" bindtap="gomessage">
+
+  <image src="{{item.avatarUrl}}" class="head" mode="widthFix"></image>
+  <view class="nm">
+    <view class="name">{{item.nickName}}</view>
+    <view class="message">{{lastMessage[index].Message[lastMessage[index].Message.length-1].content}}</view>
+  </view>
+  
+</view>

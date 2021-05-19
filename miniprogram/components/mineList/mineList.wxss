@@ -1,7 +1,10 @@
 .imgList{
-  width: 100vw;
+  width: 95vw;
   height: 300rpx;
+  border-radius: 30rpx;
+  overflow: hidden;
   position: relative;
+  margin: 15rpx auto;
 }
 
 .imgList .imglist{
@@ -11,8 +14,8 @@
 
 .content{
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 8rpx;
+  left: 15rpx;
   color: white;
   font-size: 26rpx;
   text-overflow: -o-ellipsis-lastline;

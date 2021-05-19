@@ -20,9 +20,17 @@ Page({
     schoolcommentCount:[]
   },
 
+  //点击切换
   change(e){
     this.setData({
       currentIndex:e.target.dataset.index
+    })
+  },
+
+  //滑动切换
+  curChange(e){
+    this.setData({
+      currentIndex:e.detail.current
     })
   },
 
@@ -168,7 +176,8 @@ Page({
       data:{
         $url:"schoolActive",
         start:0,
-        count:this.data.schoollist.length
+        count:this.data.schoollist.length,
+        school:moreUserinfo.school,
       }
     }).then((res)=>{
       let schoollistarr = res.result.data

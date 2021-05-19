@@ -7,6 +7,10 @@ Component({
     messageUserList:{
       type:Array,
       value:[]
+    },
+    lastMessage:{
+      type:Array,
+      value:[]
     }
   },
 
@@ -21,6 +25,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    gomessage(e){
+      
+      wx.navigateTo({
+        url: `/pages/messageDetail/messageDetail?userId=${e.currentTarget.dataset.userid}`,
+      })
+    }
   }
 })

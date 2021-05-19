@@ -32,23 +32,37 @@ wx:if="{{userInfo.nickName}}">
 </block>
 
 <view class="Item">
-  <view class="itemList"><view>34</view><view>关注</view></view>
-  <view class="itemList"><view>19</view><view>点赞</view></view>
-  <view class="itemList"><view>0</view><view>关注者</view></view>
+  <view class="itemList"><view>{{follow.length}}</view><view>关注</view></view>
+  <view class="itemList"><view>{{like.length}}</view><view>点赞</view></view>
+  <view class="itemList"><view>{{beFollow.length}}</view><view>关注者</view></view>
 </view>
 
 <view class="footer">
   <view class="chek">
-    <view class="dongtailist">动态</view>
-    <view class="yuepailist">约拍</view>
+    <block wx:for="{{check}}" wx:key="*this">
+    <view class="tabbarItem"
+    data-index="{{index}}" 
+    bindtap="change"
+    >{{item}}
+    <view data-index="{{index}}" 
+    data-num="{{currentIndex}}"
+    class="{{index == currentIndex?'dec':''}}"></view>
+  </view>
+  </block>
   </view>
 
-  <swiper class="photobox">
+  <swiper class="photobox" current="{{currentIndex}}" bindchange="curChange">
+
   <swiper-item class="dongtai">
+    <scroll-view scroll-y="true" class="bottomCon">
       <mineList myList="{{myList}}"/>
+    </scroll-view>
   </swiper-item>
+
   <swiper-item class="yuepai">
-    
+    <scroll-view scroll-y="true" class="bottomCon">
+      <mineList rightList="{{rightList}}"/>
+    </scroll-view>
   </swiper-item>
 </swiper>
 </view>

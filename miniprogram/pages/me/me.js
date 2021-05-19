@@ -1,17 +1,37 @@
-// miniprogram/pages/me/me.js
 let openId = ""
 const app = getApp()
+const db = wx.cloud.database()
+const _ = db.command
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    currentIndex:0,
+    check:["动态","约拍"],
     userInfo:[],
     moreUserinfo:{},
-    myList:[]
+    myList:[],
+    follow:[],
+    beFollow:[],
+    like:[]
   },
 
+  //点击切换
+  change(e){
+    this.setData({
+      currentIndex:e.target.dataset.index
+    })
+  },
+
+  //滑动切换
+  curChange(e){
+    this.setData({
+      currentIndex:e.detail.current
+    })
+  },
+  
   getUserinfo(e){
   wx.getUserProfile({
     desc: '获取用户信息',
@@ -65,7 +85,33 @@ goLogin(){
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    db.collection("active").where({
+      _openid:openId
+    }).watch({
+      onChange: (snapshot)=> {
+        this.setData({
+          rightList:snapshot.docs
+        })
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
 
+    db.collection("userlist").where({
+      openid:openId
+    }).watch({
+      onChange: (snapshot)=> {
+        let foo = snapshot.docs[0]
+        this.setData({
+          follow:foo.follow,
+          beFollow:foo.beFollow
+        })
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
   },
 
   /**
@@ -78,7 +124,6 @@ goLogin(){
         moreUserinfo
       })
     }
-console.log(openId);
 
     wx.cloud.callFunction({
       name:"appiontment",

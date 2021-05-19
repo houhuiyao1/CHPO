@@ -6,8 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    lastMessage:[],
     messageUserList:[]
   },
+
 
   loadmessageList(){
     wx.cloud.callFunction({
@@ -18,11 +20,20 @@ Page({
       }
     }).then(res=>{
       let arr = res.result.data
+      console.log(res.result.data);
+      
+      for(let i = 0;i < arr.length;i++){
+        arr[i].Message[arr[i].Message.length - 1].createTime = arr[i].Message[arr[i].Message.length - 1].createTime.substring(0,10)
+      }     
+
+      this.setData({
+        lastMessage:res.result.data
+      })
+      
+      
       for(let it of arr){
-        console.log(it.userId);
         userArr.push(it.userId)
       }
-      console.log(userArr);
       wx.cloud.callFunction({
         name:"userList",
         data:{

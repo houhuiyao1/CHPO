@@ -32,7 +32,8 @@
       placeholder="说说你的看法吧..."
        placeholder-class="placetalk"
        confirm-type="发送"
-       bindconfirm='send'></input>
+       bindconfirm='send'
+       value="{{value}}"></input>
     </view>
 </view>
 

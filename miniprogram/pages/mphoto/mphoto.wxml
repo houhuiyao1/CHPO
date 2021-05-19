@@ -10,14 +10,14 @@
     bindtap="change"
     >{{item}}
     <view data-index="{{index}}" 
-    data-num="{{currentIndex}}" 
+    data-num="{{currentIndex}}"
     class="{{index == currentIndex?'dec':''}}"></view>
   </view>
   </block>
 </view>
 
-
-<swiper class="photobox" current="{{currentIndex}}">
+<!-- 热门 -->
+<swiper class="photobox" current="{{currentIndex}}" bindchange="curChange" >
   <swiper-item class="hot">
     <view class="photograth">
       <view class="col"></view>
@@ -67,6 +67,7 @@
         </view>
     </scroll-view>
 
+  <!-- 同校 -->
   </swiper-item>
   <swiper-item class="close">
     <view class="photograth">

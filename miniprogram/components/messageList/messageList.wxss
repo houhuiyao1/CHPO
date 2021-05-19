@@ -1,1 +1,20 @@
-/* components/messageList/messageList.wxss */
+.list{
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx rgb(236, 235, 235) solid;
+}
+
+.head{
+  width: 120rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.name{
+  margin-bottom: 15rpx;
+}
+
+.nm{
+  display: flex;
+  flex-direction: column;
+}
