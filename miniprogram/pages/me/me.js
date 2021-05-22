@@ -34,8 +34,16 @@ Page({
   
   //查看关注用户列表
   goFollowList(e){
-    console.log(e.currentTarget.dataset.follow);
-    
+    wx.navigateTo({
+      url: `/pages/userList/userList?list=${e.currentTarget.dataset.follow}`,
+    })
+  },
+
+  //查看被关注用户列表
+  gobeFollowList(e){
+    wx.navigateTo({
+      url: `/pages/userList/userList?list=${e.currentTarget.dataset.befollow}`,
+    })
   },
 
   getUserinfo(e){

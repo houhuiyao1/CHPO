@@ -1,4 +1,4 @@
-<view class="found">
+<view class="found" bindtap="goSearch">
   <view class="foundText">Found</view>
   <icon type="search" size="30" color="#353B50" class="foundIcon"></icon>
 </view>

@@ -10,6 +10,11 @@ Page({
     messageUserList:[]
   },
 
+  goSearch(){
+    wx.navigateTo({
+      url: `/pages/search/search?currentIndex=2`,
+    })
+  },
 
   loadmessageList(){
     wx.cloud.callFunction({
@@ -19,15 +24,13 @@ Page({
         openId
       }
     }).then(res=>{
-      let arr = res.result.data
-      console.log(res.result.data);
-      
+      console.log( res.result.otherList.data);
+      let arr = res.result.messageList.data
       for(let i = 0;i < arr.length;i++){
         arr[i].Message[arr[i].Message.length - 1].createTime = arr[i].Message[arr[i].Message.length - 1].createTime.substring(0,10)
       }     
-
       this.setData({
-        lastMessage:res.result.data
+        lastMessage:arr
       })
       
       
@@ -41,9 +44,9 @@ Page({
           userArr
         }
       }).then(res=>{
-        console.log(res.result[0].data);
+        console.log(res.result);
         this.setData({
-          messageUserList:res.result[0].data
+          messageUserList:res.result
         })
       })
     })

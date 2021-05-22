@@ -11,7 +11,15 @@ Component({
     lastMessage:{
       type:Array,
       value:[]
-    }
+    },
+    userList:{
+      type:Array,
+      value:[]
+    },
+    s_rightList:{
+      type:Array,
+      value:[]
+    },
   },
 
   /**

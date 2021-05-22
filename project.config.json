@@ -150,6 +150,12 @@
           "pathName": "pages/message/message",
           "query": "userId=orqRX46Z4KTRLe_TLLgVEiKRUcxA",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/search/search",
+          "pathName": "pages/search/search",
+          "scene": null
         }
       ]
     }

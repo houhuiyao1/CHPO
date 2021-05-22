@@ -1,1 +1,5 @@
+<view class="found" bindtap="goSearch">
+  <view class="foundText">Search</view>
+  <icon type="search" size="30" color="#353B50" class="foundIcon"></icon>
+</view>
 <messageList messageUserList = "{{messageUserList}}" lastMessage = "{{lastMessage}}"/>

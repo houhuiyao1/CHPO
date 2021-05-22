@@ -1,4 +1,4 @@
-<view class="search">
+<view class="search" bindtap="goSearch">
   <view class="search-text">搜索</view>
   <icon type="search" size="30" color="" class="foundIcon"></icon>
 </view>

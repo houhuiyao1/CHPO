@@ -5,6 +5,7 @@
   overflow: hidden;
   position: relative;
   margin: 15rpx auto;
+  box-shadow: 2rpx 2rpx 3rpx 3rpx rgb(219, 218, 218);
 }
 
 .imgList .imglist{
@@ -14,7 +15,7 @@
 
 .content{
   position: absolute;
-  bottom: 8rpx;
+  bottom: 88rpx;
   left: 15rpx;
   color: white;
   font-size: 26rpx;
@@ -24,4 +25,29 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+.footer{
+  width: 100%;
+  height: 80rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  display: flex;
+  align-items: center;
+
+}
+
+.head{
+  height: 60rpx;
+  width: 60rpx;
+  border-radius: 50%;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  font-size: 22rpx;
+  margin-left: 5rpx;
 }

@@ -1,3 +1,23 @@
+page{
+  background-color: white;
+}
+
+.found{
+  overflow: hidden;
+  margin: 20rpx 30rpx 0 40rpx;
+}
+
+.foundText{
+  float: left;
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.foundIcon{
+  float: right;
+}
+
+
 image{
   width: 100rpx;
 }

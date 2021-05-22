@@ -11,6 +11,12 @@ Page({
     likeArrcount:[]
   },
 
+  //去搜索页面
+  goSearch(){
+    wx.navigateTo({
+      url: `/pages/search/search?currentIndex=0`,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -30,7 +36,7 @@ Page({
       data:{
         $url:"appiontment",
         start:this.data.appiontmentList.length,
-        count:10
+        count:4
       }
     }).then((res)=>{
       let len = res.result.data.length

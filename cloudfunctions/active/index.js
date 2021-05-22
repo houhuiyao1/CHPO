@@ -79,6 +79,47 @@ exports.main = async (event, context) => {
     })
   })
 
+  //获取搜索内容
+  app.router("searchActive",async(ctx,next)=>{
+    let searchList = await db.collection("active").where(
+      _.or([
+        {
+          moreUserinfo:{
+            school:db.RegExp({
+              regexp:'.*' +event.content,
+              option:'i'
+            })
+          }
+        },
+        {
+          moreUserinfo:{
+            status:_.eq(event.content)
+          }
+        },
+        {
+          userInfo:{
+            nickName:db.RegExp({
+              regexp:'.*' +event.content,
+              option:'i'
+            })
+          }
+        },
+        {
+          content:db.RegExp({
+            regexp:'.*' +event.content,
+            option:'i'
+          })
+        }
+      ])
+    )
+    .get()
+    .then(res=>{
+      return res
+    })
+
+    ctx.body = searchList
+  })
+
   return app.serve()
 
 }

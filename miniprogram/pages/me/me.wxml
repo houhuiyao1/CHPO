@@ -34,7 +34,7 @@ wx:if="{{userInfo.nickName}}">
 <view class="Item">
   <view class="itemList" bindtap="goFollowList" data-follow = "{{follow}}"><view>{{follow.length}}</view><view>关注</view></view>
   <view class="itemList"><view>{{like.length}}</view><view>点赞</view></view>
-  <view class="itemList" bindtap="gobeFollowList" data-follow = "{{beFollow}}"><view>{{beFollow.length}}</view><view>关注者</view></view>
+  <view class="itemList" bindtap="gobeFollowList" data-beFollow = "{{beFollow}}"><view>{{beFollow.length}}</view><view>关注者</view></view>
 </view>
 
 <view class="footer">

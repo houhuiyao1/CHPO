@@ -152,6 +152,52 @@ exports.main = async (event, context) => {
     ctx.body = messageUserArr
   })
 
+  app.router("getUserList",async(ctx,next)=>{
+    let uList = []
+    let userArr = event.userList
+    for(let j = 0;j < userArr.length;j++){
+      let t = await db.collection("userlist").where({
+        openid:userArr[j]
+      })
+      .get()
+      .then(res =>{
+        return res
+      })
+      uList.push(t)
+    }
+
+    ctx.body = uList
+  })
+
+  //获取搜索内容
+  app.router("searchUserlist",async(ctx,next)=>{
+    let searchList = await db.collection("userlist").where(
+      _.or([
+        {
+            school:db.RegExp({
+              regexp:'.*' +event.content,
+              option:'i'
+            })
+        },
+        {
+            status:_.eq(event.content)
+        },
+        {
+            nickName:db.RegExp({
+              regexp:'.*' +event.content,
+              option:'i'
+            })
+        }
+      ])
+    )
+    .get()
+    .then(res=>{
+      return res
+    })
+
+    ctx.body = searchList
+  })
+
   return app.serve()
 
 }

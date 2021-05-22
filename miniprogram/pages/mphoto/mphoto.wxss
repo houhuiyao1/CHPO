@@ -6,16 +6,16 @@ page{
   width: 90vw;
   height: 70rpx;
   margin: 20rpx auto;
-  border: 2rpx rgb(231, 227, 227) solid;
+  border: 2rpx #2CD18A solid;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 15rpx;
   border-radius: 10rpx;
-  box-shadow: 2rpx -2rpx 15px 1rpx rgb(240, 238, 238),
-              -2rpx 2rpx 15px 1rpx rgb(240, 238, 238),
-              2rpx 2rpx 15px 1rpx rgb(240, 238, 238),
-              2rpx 2rpx 15px 1rpx rgb(240, 238, 238);
+  box-shadow: 2rpx -2rpx 3px 1rpx rgb(240, 238, 238),
+              -2rpx 2rpx 3px 1rpx rgb(240, 238, 238),
+              2rpx 2rpx 3px 1rpx rgb(240, 238, 238),
+              2rpx 2rpx 3px 1rpx rgb(240, 238, 238);
 }
 
 .search-text{

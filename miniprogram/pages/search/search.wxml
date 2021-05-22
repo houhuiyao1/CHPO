@@ -1,0 +1,39 @@
+<view class="back" bindtap="back"><image src="../../images/icon/return.png" class="return"></image></view>
+  <view class="title">Search</view>
+    <input 
+    type="text" 
+    class="search"
+    placeholder="搜索"
+    bindinput="getInput"
+    confirm-type="发送"
+    bindconfirm='send'>
+
+    </input>
+
+<view class="center">
+  <view 
+  class="list {{index==currentIndex?'active':''}}" 
+  wx:for="{{choose}}" 
+  wx:key="*this"
+  data-num="{{index}}"
+  bindtap="choose">{{item}}</view>
+</view>
+
+
+<swiper class="footer" current="{{currentIndex}}" bindchange="changeCur">
+  <swiper-item>
+    <scroll-view scroll-y="true" class="footer">
+      <mineList s_leftList = "{{leftList}}"/>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>
+    <scroll-view scroll-y="true" class="footer">
+      <mineList s_centerList = "{{centerList}}"/>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>
+    <scroll-view scroll-y="true" class="footer">
+      <messageList s_rightList = "{{rightList}}"/>
+    </scroll-view>
+  </swiper-item>
+</swiper>

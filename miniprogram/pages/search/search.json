@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mineList":"/components/mineList/mineList",
+    "messageList":"/components/messageList/messageList"
+  },
+  "navigationStyle": "custom" 
+}

@@ -8,7 +8,11 @@ Component({
       type:Array,
       value:[]
     },
-    rightList:{
+    s_leftList:{
+      type:Array,
+      value:[]
+    },
+    s_centerList:{
       type:Array,
       value:[]
     }
