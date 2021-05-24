@@ -2,6 +2,26 @@ page{
   background-color: white;
 }
 
+.search{
+  width: 90vw;
+  height: 70rpx;
+  margin: 20rpx auto;
+  border: 2rpx #2CD18A solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15rpx;
+  border-radius: 10rpx;
+  box-shadow: 2rpx -2rpx 3px 1rpx rgb(240, 238, 238),
+              -2rpx 2rpx 3px 1rpx rgb(240, 238, 238),
+              2rpx 2rpx 3px 1rpx rgb(240, 238, 238),
+              2rpx 2rpx 3px 1rpx rgb(240, 238, 238);
+}
+
+.search-text{
+  color: rgb(172, 166, 166);
+}
+
 .found{
   overflow: hidden;
   margin: 40rpx 40rpx 0 40rpx;

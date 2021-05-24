@@ -8,14 +8,48 @@ Page({
    * 页面的初始数据
    */
   data: {
+    currentIndex:0,
+    check:["动态","约拍"],
     userList:[],
     isfollow:false,
     nofollowUrl:"../../images/icon/follow(1).png",
     followUrl:"../../images/icon/follow(2).png",
     followArr:[],
-    beFollowArr:[]
+    beFollowArr:[],
+    follow:[],
+    beFollow:[],
+    like:[]
   },
 
+  //点击切换
+  change(e){
+    this.setData({
+      currentIndex:e.target.dataset.index
+    })
+  },
+
+  //滑动切换
+  curChange(e){
+    this.setData({
+      currentIndex:e.detail.current
+    })
+  },
+  
+  //查看关注用户列表
+  goFollowList(e){
+    wx.navigateTo({
+      url: `/pages/userList/userList?list=${e.currentTarget.dataset.follow}`,
+    })
+  },
+
+  //查看被关注用户列表
+  gobeFollowList(e){
+    wx.navigateTo({
+      url: `/pages/userList/userList?list=${e.currentTarget.dataset.befollow}`,
+    })
+  },
+
+  
   follow(e){
     if(this.data.isfollow){
       this.setData({
@@ -111,7 +145,6 @@ Page({
     })
     .get()
     .then(res =>{
-
       this.setData({
         userList:res.data[0],
         beFollowArr:res.data[0].beFollow
@@ -136,7 +169,6 @@ Page({
           isfollow:true
         })
       }
-
     })
 
   },
@@ -145,7 +177,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    db.collection("active").where({
+      _openid:userId
+    }).watch({
+      onChange: (snapshot)=> {
+        console.log(snapshot.docs);
+        this.setData({
+          rightList:snapshot.docs
+        })
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
 
+    db.collection("appiontment").where({
+      _openid:userId
+    }).watch({
+      onChange: (snapshot)=> {
+        console.log(snapshot.docs);
+        this.setData({
+          myList:snapshot.docs
+        })
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+
+    db.collection("userlist").where({
+      openid:userId
+    }).watch({
+      onChange: (snapshot)=> {
+        let foo = snapshot.docs[0]
+        this.setData({
+          follow:foo.follow,
+          beFollow:foo.beFollow
+        })
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
   },
 
   /**

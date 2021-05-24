@@ -1,0 +1,8 @@
+<swiper style="height:{{app_height}}rpx">
+  <swiper-item >
+    <mineList s_centerList='{{centerList}}'/>
+  </swiper-item>
+  <swiper-item>
+    <mineList s_leftList='{{leftList}}'/>
+  </swiper-item>
+</swiper>

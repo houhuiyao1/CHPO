@@ -2,11 +2,26 @@ page{
   background-color: white;
 }
 
+.found{
+  overflow: hidden;
+  margin: 40rpx 40rpx 0 40rpx;
+}
+
+.foundText{
+  float: left;
+  font-size: 46rpx;
+  font-weight: 700;
+}
+
+.foundIcon{
+  float: right;
+}
+
 .search{
   width: 90vw;
   height: 70rpx;
   margin: 20rpx auto;
-  border: 2rpx #2CD18A solid;
+  border: 2rpx rgb(220, 224, 223) solid;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -98,20 +113,28 @@ page{
   font-size: 25rpx
 }
 
-.list{
-  margin: 10rpx 20rpx;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
 .col{
   height: 35rpx;
   width: 8rpx;
   background-color: #2CD18A;
   position: absolute;
   left: -20rpx;
-  top: 6rpx;
+  top: 5rpx;
+}
+
+.pg{
+  float: left;
+}
+
+.more{
+  width: 110rpx;
+  height: 50rpx;
+  float: right;
+  font-size: 35rpx;
+  color: #2CD18A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

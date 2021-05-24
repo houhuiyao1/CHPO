@@ -1,6 +1,11 @@
-<view class="found" bindtap="goSearch">
+<!-- <view class="found" bindtap="goSearch">
   <view class="foundText">Found</view>
   <icon type="search" size="30" color="#353B50" class="foundIcon"></icon>
+</view> -->
+
+<view class="search" bindtap="goSearch">
+  <view class="search-text">搜索</view>
+  <icon type="search" size="30" color="" class="foundIcon"></icon>
 </view>
 
 <view class="BOX">

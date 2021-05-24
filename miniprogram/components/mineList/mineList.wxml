@@ -15,7 +15,7 @@
 <block wx:for="{{s_leftList}}" wx:key="_id">
     <view class="imgList" data-id = "{{item._id}}" bindtap="app">
         <image src="{{item.img[0]}}" class="imglist" mode="aspectFill"></image>
-        <view class="content">{{item.content}}</view>
+        <view class="s_content">{{item.content}}</view>
         <view class="footer">
             <image src="{{item.userInfo.avatarUrl}}" class="head"></image>
             <view class="info">
@@ -27,9 +27,9 @@
 </block>
 
 <block wx:for="{{s_centerList}}" wx:key="_id">
-    <view class="imgList" data-id = "{{item._id}}" bindtap="app">
+    <view class="imgList" data-id = "{{item._id}}" bindtap="act">
         <image src="{{item.img[0]}}" class="imglist" mode="aspectFill"></image>
-        <view class="content">{{item.content}}</view>
+        <view class="s_content">{{item.content}}</view>
         <view class="footer">
             <image src="{{item.userInfo.avatarUrl}}" class="head"></image>
             <view class="info">

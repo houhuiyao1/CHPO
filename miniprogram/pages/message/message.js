@@ -1,5 +1,9 @@
 let openId = ''
 let userArr = []
+const db = wx.cloud.database()
+const _ = db.command
+let p = ''
+let arr = ''
 Page({
 
   /**
@@ -17,23 +21,7 @@ Page({
   },
 
   loadmessageList(){
-    wx.cloud.callFunction({
-      name:"messageList",
-      data:{
-        $url:"messageList",
-        openId
-      }
-    }).then(res=>{
-      console.log( res.result.otherList.data);
-      let arr = res.result.messageList.data
-      for(let i = 0;i < arr.length;i++){
-        arr[i].Message[arr[i].Message.length - 1].createTime = arr[i].Message[arr[i].Message.length - 1].createTime.substring(0,10)
-      }     
-      this.setData({
-        lastMessage:arr
-      })
-      
-      
+      userArr = []
       for(let it of arr){
         userArr.push(it.userId)
       }
@@ -44,12 +32,13 @@ Page({
           userArr
         }
       }).then(res=>{
-        console.log(res.result);
+        console.log(res);
+        
         this.setData({
           messageUserList:res.result
         })
       })
-    })
+    
   },
 
   /**
@@ -64,14 +53,41 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
+    p = new Promise((resolve,rejects)=>{
+      wx.cloud.callFunction({
+        name:"messageList",
+        data:{
+          $url:"messageList",
+          openId
+        }
+      }).then(res=>{
+        console.log( res);
+        arr = res.result.data
+        for(let item of arr){
+          if(item._openid !== openId){
+            let tmp = item.userId
+            item.userId = item._openid
+            item._openid = tmp
+          }
+        }
+        this.setData({
+          lastMessage:arr
+        })
+        resolve()
+    })
+  })
+  console.log(p);
+  p.then(res=>{
+    this.loadmessageList()
+  })
   },
 
   /**

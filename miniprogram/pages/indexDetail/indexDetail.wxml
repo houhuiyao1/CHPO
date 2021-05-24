@@ -6,7 +6,11 @@
   circular="true"
   autoplay="true">
     <swiper-item wx:for="{{list[0].img}}" wx:key="*this">
-      <image src="{{item}}" class="image" mode="aspectFill"></image>
+      <image src="{{item}}" 
+      class="image" 
+      mode="aspectFill" 
+      bindtap="previewImage" 
+      data-imagesrc="{{item}}"></image>
     </swiper-item>
   </swiper>
 </view>
@@ -17,12 +21,20 @@
   </view>
 
   <view class="info">
-    <image src="{{list[0].userInfo.avatarUrl}}" class="headPhoto"></image>
-    <view class="name">{{list[0].userInfo.nickName}}</view>
+    <image src="{{list[0].userInfo.avatarUrl}}" 
+    class="headPhoto" 
+    data-userid = "{{list[0]._openid}}"
+    bindtap="goUserDetail"></image>
+    <view class="r_info">
+      <view class="name">{{list[0].userInfo.nickName}}</view>
+      <view>{{list[0].moreUserinfo.status}} · {{list[0].moreUserinfo.school}}</view>
+    </view>
   </view>
   <view class="contentText">
     {{list[0].content}}
   </view>
+
+  <view wx:for="{{list[0].label}}" wx:key="idnex" class="label">#{{item}}</view>
 
 <view class="send">
     <view class="ava"><image src="{{talkHeadphoto}}"></image></view>
@@ -31,7 +43,7 @@
       class="writeContent" 
       placeholder="说说你的看法吧..."
        placeholder-class="placetalk"
-       confirm-type="发送"
+       confirm-type="send"
        bindconfirm='send'
        value="{{value}}"></input>
     </view>
@@ -39,7 +51,9 @@
 
 <view>评论列表</view>
 <view wx:for="{{list[0].comment}}" wx:key="_id" class="comment">
-  <view class="commentInfo">
+  <view class="commentInfo"
+        data-userid = "{{item.openId}}"
+        bindtap="goUserDetail">
     <image src="{{item.userInfo.avatarUrl}}" class="commentHead"></image>
     <view>{{item.userInfo.nickName}}</view>
   </view>

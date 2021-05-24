@@ -8,6 +8,8 @@ page{
   height: 120rpx;
   font-size: 30rpx;
   display: flex;
+  top: 0;
+  left: 0;
   align-items: center;
   border-bottom: 1rpx rgb(243, 243, 243) solid;
 }
@@ -124,5 +126,15 @@ page{
   padding: 20rpx;
   border-radius: 30rpx;
   font-size: 28rpx;
+}
+
+.r_img{
+  width: 300rpx;
+  float: right;
+}
+
+.l_img{
+  width: 300rpx;
+  float: left;
 }
 

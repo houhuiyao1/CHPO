@@ -11,7 +11,8 @@
     "pages/messageDetail/messageDetail",
     "pages/user/user",
     "pages/userList/userList",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/like/like"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -23,16 +24,16 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "/images/icon/home.png",
-        "selectedIconPath": "/images/icon/home1.png"
-      },
-      {
         "pagePath": "pages/mphoto/mphoto",
         "text": "约拍",
         "iconPath": "/images/icon/mphoto.png",
         "selectedIconPath": "/images/icon/mphoto1.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "动态",
+        "iconPath": "/images/icon/act.png",
+        "selectedIconPath": "/images/icon/act1.png"
       },
       {
         "pagePath": "pages/fabu/fabu",

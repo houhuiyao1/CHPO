@@ -3,35 +3,57 @@
     <image src="{{isfollow?followUrl:nofollowUrl}}"></image>
   </view>
       <view class="pn" >
-      <view class="headphoto"><image src="{{userList.avatarUrl}}"></image></view>
+      <view class="headphoto">
+        <image src="{{userList.avatarUrl}}"  wx:if="{{userList.avatarUrl}}"></image>
+      </view>
       <view class="nickName">{{userList.nickName}}</view>
       </view> 
       <image src="../../images/icon/email.png" class="talk" bindtap="goMessage" data-userId="{{userList.openid}}"></image>
 
 </view>
 
-<block>
-<view class="write" bindtap="goLogin">{{userList.status}} · {{userList.school}}</view>
-<view class="introduce" bindtap="goLogin">{{userList.introduce}}</view>
-</block>
+<view wx:if="{{userList.status}}" class="moreUserinfo">
+  <view class="write">{{userList.status}} · {{userList.school}}</view>
+  <view class="introduce">{{userList.introduce}}</view>
+</view>
+
+<view wx:else class="moreUserinfo">
+  <view class="write"></view>
+  <view class="introduce" >{{userList.introduce}}</view>
+</view>
 
 <view class="Item">
-  <view class="itemList"><view>34</view><view>关注</view></view>
-  <view class="itemList"><view>19</view><view>点赞</view></view>
-  <view class="itemList"><view>0</view><view>关注者</view></view>
+  <view class="itemList" bindtap="goFollowList" data-follow = "{{userList.follow}}"><view>{{follow.length}}</view><view>关注</view></view>
+  <view class="itemList"><view>{{like.length}}</view><view>点赞</view></view>
+  <view class="itemList" bindtap="gobeFollowList" data-beFollow = "{{userList.beFollow}}"><view>{{beFollow.length}}</view><view>粉丝</view></view>
 </view>
 
 <view class="footer">
   <view class="chek">
-    <view class="dongtailist">动态</view>
-    <view class="yuepailist">约拍</view>
+    <block wx:for="{{check}}" wx:key="*this">
+    <view class="tabbarItem"
+    data-index="{{index}}" 
+    bindtap="change"
+    >{{item}}
+    <view data-index="{{index}}" 
+    data-num="{{currentIndex}}"
+    class="{{index == currentIndex?'dec':''}}"></view>
+  </view>
+  </block>
   </view>
 
-  <swiper class="photobox">
-  <swiper-item class="dongtai">
-      <mineList userList="{{userList}}"/>
-  </swiper-item>
-  <swiper-item class="yuepai">
-  </swiper-item>
+<swiper class="photobox" current="{{currentIndex}}" bindchange="curChange">
+
+<swiper-item class="dongtai">
+  <scroll-view scroll-y="true" class="bottomCon">
+    <mineList myList="{{myList}}"/>
+  </scroll-view>
+</swiper-item>
+
+<swiper-item class="yuepai">
+  <scroll-view scroll-y="true" class="bottomCon">
+    <mineList rightList="{{rightList}}"/>
+  </scroll-view>
+</swiper-item>
 </swiper>
 </view>

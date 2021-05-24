@@ -6,7 +6,7 @@ let messageId = ''
 let content = ''
 const db = wx.cloud.database()
 const _ = db.command
-
+let fileId = ''
 Page({
 
   /**
@@ -14,7 +14,27 @@ Page({
    */
   data: {
     content:"",
-    messageList:[]
+    messageList:[],
+    toView:0,
+    sendHeight:0,
+    img:''
+  },
+
+  //点击输入框
+  foucs(e){
+    console.log(e.detail.height);
+    this.setData({
+      sendHeight:e.detail.height + 300,
+      scrollHeight:`calc(100vh - 240rpx - 55rpx - ${e.detail.height + 300}rpx)`
+    })
+  },
+
+  //发送后
+  blur(e){
+    this.setData({
+      sendHeight:0,
+      scrollHeight:`height: calc(100vh - 240rpx - 55rpx)`
+    })
   },
 
 //返回
@@ -99,13 +119,62 @@ Page({
             openId,
             userInfo,
             content,
-            createTime:db.serverDate()
+            createTime:db.serverDate(),
+            type:"text"
           })
         }
       })
-    
   },
 
+  //发送图片
+  sendImage(e){
+    let p = new Promise((resolve,reject)=>{
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success :(res) =>{      
+          console.log(res.tempFilePaths);
+          this.setData({
+            img:res.tempFilePaths[0]
+          })
+          resolve()
+        }
+      })
+    })
+
+    p.then(res=>{
+      let item = this.data.img
+      let suffix = /\.\w+$/.exec(item)
+      wx.cloud.uploadFile({
+        cloudPath:`active/${Date.now()}-${Math.random()*1000}${suffix}`,
+        filePath:item,
+        success:(res)=>{ 
+          fileId=res.fileID
+          console.log(fileId);
+          db.collection("message")
+          .where({
+            _openid:_.eq(openId).or(_.eq(userId)),
+            userId:_.eq(openId).or(_.eq(userId))
+          })
+          .update({
+            data:{
+              Message:_.push({
+                openId,
+                userInfo,
+                content:fileId,
+                createTime:db.serverDate(),
+                type:"image"
+              })
+            }
+          })
+        },
+        fail:(err)=>{
+          console.log(err); 
+        }
+      })
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -138,9 +207,11 @@ Page({
     })
     .watch({
       onChange: (snapshot)=> {
-
+        console.log(snapshot.docs[0].Message);
+        
         this.setData({
-          messageList:snapshot.docs[0].Message
+          messageList:snapshot.docs[0].Message,
+          toView: 'msg_' + (snapshot.docs[0].Message.length - 1)
         })
       },
       onError: function(err) {

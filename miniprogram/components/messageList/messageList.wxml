@@ -3,11 +3,18 @@
   <image src="{{item.data[0].avatarUrl}}" class="head" mode="widthFix"></image>
   <view class="nm">
     <view class="name">{{item.data[0].nickName}}</view>
-    <view class="message">{{lastMessage[index].Message[lastMessage[index].Message.length-1].content}}</view>
-  </view>
+      <view class="message" 
+      wx:if="{{lastMessage[index].Message[lastMessage[index].Message.length-1].type==='text'}}"
+      >{{lastMessage[index].Message[lastMessage[index].Message.length-1].content}}</view>
+      <view class="message" 
+      wx:if="{{lastMessage[index].Message[lastMessage[index].Message.length-1].type==='image'}}"
+      >[图片]</view>
+
+    </view>
+    
 </view>
 
-<view wx:for="{{userList}}" wx:key="*this" class="list" data-userId = "{{item.data[0].openid}}" bindtap="gomessage" wx:if="{{userList}}">
+<view wx:for="{{userList}}" wx:key="*this" class="list" data-userId = "{{item.data[0].openid}}" bindtap="goUser" wx:if="{{userList}}">
   <image src="{{item.data[0].avatarUrl}}" class="head" mode="widthFix"></image>
   <view class="nm">
     <view class="name">{{item.data[0].nickName}}</view>
@@ -15,7 +22,7 @@
   </view>
 </view>
 
-<view wx:for="{{s_rightList}}" wx:key="*this" class="list" data-userId = "{{item.openid}}" bindtap="gomessage" wx:if="{{s_rightList}}">
+<view wx:for="{{s_rightList}}" wx:key="*this" class="list" data-userId = "{{item.openid}}" bindtap="goUser" wx:if="{{s_rightList}}">
   <image src="{{item.avatarUrl}}" class="head" mode="widthFix"></image>
   <view class="nm">
     <view class="name">{{item.nickName}}</view>

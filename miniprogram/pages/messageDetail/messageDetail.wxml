@@ -8,22 +8,28 @@
   </view>
 </view>
 
-<scroll-view class="center" scroll-y="true">
+<scroll-view class="center" scroll-y="true" scroll-into-view='{{toView}}' 
+style="height:{{scrollHeight}}">
 <block wx:for="{{messageList}}" wx:key="index">
-  <view class="rightBox mess">
-    <text wx:if="{{item.openId === openId}}" class="right message">{{item.content}}</text>
+  <view class="rightBox mess" wx:if="{{item.openId === openId}}" data-msg = "{{index}}" id='msg_{{index}}'>
+    <text  class="right message" wx:if="{{item.type=='text'}}">{{item.content}}</text>
+    <image src="{{item.content}}" wx:if="{{item.type=='image'}}" class="r_img" mode="widthFix"></image>
   </view>
-  <view class="leftBox mess">
-    <text wx:if="{{item.openId === userId}}" class="left message">{{item.content}}</text>
+  <view class="leftBox mess" wx:if="{{item.openId === userId}}" data-msg = "{{index}}" id='msg_{{index}}'>
+    <text  class="left message" wx:if="{{item.type=='text'}}">{{item.content}}</text>
+    <image src="{{item.content}}" wx:if="{{item.type=='image'}}" class="l_img"></image>
   </view>
 </block>
 </scroll-view>
 
-<view class="bottom">
+<view class="bottom" style="bottom:{{sendHeight}}rpx">
   <input type="text" 
   class="set"
-  confirm-type="发送"
+  confirm-type="send"
   bindconfirm='send'
-  value="{{content}}"></input>
-  <view class="add"><image src="../../images/icon/add.png"></image></view>
+  value="{{content}}"
+  adjust-position='{{false}}'
+  bindfocus="foucs"
+  bindblur="blur"></input>
+  <view class="add" bindtap="sendImage"><image src="../../images/icon/add.png"></image></view>
 </view>

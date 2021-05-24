@@ -5,7 +5,7 @@
     class="search"
     placeholder="搜索"
     bindinput="getInput"
-    confirm-type="发送"
+    confirm-type="search"
     bindconfirm='send'>
 
     </input>

@@ -19,6 +19,22 @@ Page({
     islikeArr:[]
   },
 
+  //预览图片
+  previewImage(e){
+    wx.previewImage({
+      urls: this.data.list[0].img,
+      current:e.target.dataset.imagesrc
+    })
+  },
+
+  //到用户详情页
+    goUserDetail(e){
+      wx.navigateTo({
+        url: `/pages/user/user?userId=${e.currentTarget.dataset.userid}`,
+      })
+    },
+
+  //点赞
   islike(){
     this.setData({
       islike:!this.data.islike
@@ -77,16 +93,17 @@ Page({
        openId
      }
     }).then((res)=>{
+      console.log(res);
       
-      let len = res.result.commentList.data.length
+      let len = res.result.data[0].comment.length
       for(let i = 0;i < len;i++){
-        res.result.commentList.data[i].createTime = res.result.commentList.data[i].createTime.substring(0,10)
+        res.result.data[0].comment[i].createTime = res.result.data[0].comment[i].createTime.substring(0,10)
       }
       this.setData({
-        list:res.result.appiontmentDetail.data,
-        commentList:res.result.commentList.data,
+        list:res.result.data,
+        commentList:res.result.data.comment,
         id:options.id,
-        islikeArr:res.result.appiontmentDetail.data[0].like,
+        islikeArr:res.result.data[0].like,
         talkHeadphoto:userInfo.avatarUrl
       })
       wx.hideLoading()
@@ -132,12 +149,12 @@ Page({
       }
     }).then((res)=>{
       console.log(res);     
-      let arr = res.result.appiontmentDetail.data[0].comment
+      let arr = res.result.data[0].comment
        for(let i = 0;i < arr.length;i++){
          arr[i].createTime = arr[i].createTime.substring(0,10)
        }
       this.setData({
-        list:res.result.appiontmentDetail.data,
+        list:res.result.data,
         talkHeadphoto:userInfo.avatarUrl,
         value:""
       })

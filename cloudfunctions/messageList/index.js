@@ -24,21 +24,21 @@ exports.main = async (event, context) => {
   })
 
   app.router("messageList",async(ctx,next)=>{
-    let messageList = await db.collection("message").where({
-      _openid:event.openId
-    }).get()
+    let messageList = await db.collection("message").where(
+      _.or([
+        {
+          _openid:event.openId
+        },
+        {
+          userId:event.openId
+        }
+      ])
+    ).get()
     .then(res=>{
       return res
     })
 
-    let otherList = await db.collection("message").where({
-      userId:event.openId
-    }).get()
-    .then(res=>{
-      return res
-    })
-
-    ctx.body = {messageList,otherList}
+    ctx.body = messageList
   })
 
   return app.serve()

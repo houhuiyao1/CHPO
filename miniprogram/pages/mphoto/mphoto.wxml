@@ -3,6 +3,11 @@
   <icon type="search" size="30" color="" class="foundIcon"></icon>
 </view>
 
+<!-- <view class="found" bindtap="goSearch">
+  <view class="foundText">Found</view>
+  <icon type="search" size="30" color="#353B50" class="foundIcon"></icon>
+</view> -->
+
 <view class="tabbar">
   <block wx:for="{{check}}" wx:key="*this">
     <view class="tabbarItem"
@@ -21,7 +26,8 @@
   <swiper-item class="hot">
     <view class="photograth">
       <view class="col"></view>
-      摄影师
+      <view class="pg">摄影师</view>
+      <view class="more" bindtap="morepg">>></view>
     </view>
 
     <scroll-view class="box" scroll-x="true" enable-flex="true" wx:if="{{photograph.length !== 0}}">
@@ -37,9 +43,10 @@
 
     <view  wx:if="{{photograph.length == 0}}" class="gophoto">快去成为第一位摄影师吧！</view>
     
-    <view class="list">
+    <view class="photograth">
       <view class="col"></view>
-      约拍列表
+      <view class="pg">约拍列表</view>
+      <view class="more" bindtap="moreph">>></view>
     </view>
 
     <scroll-view class="photoBox" scroll-y="true" enable-flex="true">
@@ -77,7 +84,7 @@
 
     <scroll-view class="box" scroll-x="true" enable-flex="true" wx:if="{{photograph.length !== 0}}">
       <block wx:for="{{photograph}}" wx:key="_id">
-    <view class="photograthList" >
+    <view class="photograthList" data-userId ="{{item.openid}}" bindtap="userDetail">
         <view class="headphoto"><image src="{{schoolPhotograph[index].avatarUrl}}"></image></view>
         <view class="name">{{schoolPhotograph[index].nickName}}</view>
     </view>

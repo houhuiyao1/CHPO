@@ -55,7 +55,20 @@ exports.main = async (event, context) => {
     }
   })
 
-  
+  //获取点赞内容
+  app.router("likeList",async(ctx,next)=>{
+    let likeList = await db.collection("active").where({
+      like:_.in([event.userId])
+    })
+    .skip(event.start)
+    .limit(event.count)
+    .orderBy("createTime","desc")
+    .get()
+    .then(res=>{
+      return res
+    })
+    ctx.body = likeList
+  })
 
   app.router('activeLike',async(ctx,next)=>{
     db.collection('active').where({

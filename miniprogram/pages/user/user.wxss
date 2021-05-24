@@ -27,8 +27,7 @@ page{
 }
 
 .nickName{
-  font-size: 32rpx;
-  height: 32rpx;
+  height: 34rpx;
 }
 
 .pn{
@@ -73,18 +72,16 @@ page{
   bottom: -40rpx;
 }
 
+.moreUserinfo{
+  height: 74rpx;
+}
+
 .write{
-  height: 26rpx;
   margin-top: 130rpx;
   font-size: 26rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.write image{
-  width: 30rpx;
-  height: 30rpx;
 }
 
 .introduce{
@@ -93,17 +90,18 @@ page{
   align-items: center;
   font-size: 26rpx;
   margin-top: 5rpx;
-  height: 26rpx;
 }
 
 .Item{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 40rpx 0;
+  margin: 20rpx 0;
 }
 
 .itemList{
+  width: 200rpx;
+  height: 100rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,13 +110,27 @@ page{
 .chek{
   display: flex;
   justify-content: space-around;
-  padding: 30rpx 0;
+  padding: 10rpx 0;
   border-top: 2rpx rgb(230, 228, 228) solid;
+}
+
+.tabbarItem{
+  width: 240rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dec{
+  width: 120rpx;
+  height: 6rpx;
+  background-color: #2CD18A;
+  margin-top: 10rpx;
 }
 
 .photobox{
   width: 100vw;
-  height: 100vh;
+  height: 60vh;
   margin: auto;
 }
 
@@ -130,3 +142,6 @@ page{
   float: right;
 }
 
+.bottomCon{
+  height: 60vh;
+}

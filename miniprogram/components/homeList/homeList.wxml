@@ -6,7 +6,7 @@
   circular="true">
     <!-- <image src="{{item}}" class="image"></image> -->
       <swiper-item wx:for="{{appiontmentList[index].img}}" wx:key="*this">
-        <image src="{{item}}" class="image"></image>
+        <image src="{{item}}" class="image" mode="center"></image>
       </swiper-item>
   </swiper>
 
@@ -21,8 +21,13 @@
 <view class="content">{{appiontmentList[index].content}}</view>
 
   <view class="bottom-right">
-    <view class="icon"  data-index="{{index}}"><image src="{{likeArr[index]?likeUrl:nolikeUrl}}"></image><view class="text">{{likeArrcount[index]}}</view></view>
-    <view class="icon"><image src="../../images/icon/talk.png"></image><view class="text">{{appiontmentList[index].comment.length}}</view></view>
-    <!-- <view class="icon"><image src="../../images/icon/send1.png"></image></view> -->
+    <view class="l_icon"  data-index="{{index}}"><image src="{{likeArr[index]?likeUrl:nolikeUrl}}" class="icon"></image><view class="text">{{likeArrcount[index]}}</view></view>
+    <view class="labelBox">
+    <view 
+    wx:for="{{appiontmentList[index].label}}"
+    wx:key="index"
+    class="label">#{{item}}</view>
+  </view>
+    <view class="r_icon"><image src="../../images/icon/talk.png" class="icon"></image><view class="text">{{appiontmentList[index].comment.length}}</view></view>
   </view>
 </view>

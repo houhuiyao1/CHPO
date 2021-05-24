@@ -5,7 +5,7 @@ indicator-active-color="#2CD18A"
 circular="true"
 autoplay="true">
   <swiper-item wx:for="{{list[0].img}}" wx:key="*this">
-    <image src="{{item}}"></image>
+    <image src="{{item}}" mode="center" bindtap="previewImage" data-imagesrc="{{item}}"></image>
   </swiper-item>
 </swiper>
 
@@ -15,7 +15,7 @@ autoplay="true">
     <view class="like" bindtap="islike">
       <image src="{{islike?likeUrl:nolikeUrl}}" class="likeimage"></image>
     </view>
-    <image src="{{list[0].userInfo.avatarUrl}}"></image>
+    <image src="{{list[0].userInfo.avatarUrl}}" data-userid = "{{list[0]._openid}}" bindtap="userDetail"></image>
     <view class="name">
       <view>{{list[0].userInfo.nickName}}</view>
       <view class="moreUserinfo">{{list[0].moreUserinfo.status}} · {{list[0].moreUserinfo.school}}</view>
@@ -33,7 +33,7 @@ autoplay="true">
       class="writeContent" 
       placeholder="说说你的看法吧..."
        placeholder-class="placetalk"
-       confirm-type="发送"
+       confirm-type="send"
        bindconfirm='send'
        value="{{value}}"></input>
     </view>
@@ -42,7 +42,9 @@ autoplay="true">
 <view>评论</view>
 
 <block wx:for="{{list[0].comment}}" wx:key="_id">
-  <view class="commentInfo">
+  <view class="commentInfo"
+        data-userid = "{{item.openId}}"
+        bindtap="userDetail">
     <image src="{{item.userInfo.avatarUrl}}" class="commentHead"></image>
     <view>{{item.userInfo.nickName}}</view>
   </view>

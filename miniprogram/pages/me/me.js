@@ -2,6 +2,7 @@ let openId = ""
 const app = getApp()
 const db = wx.cloud.database()
 const _ = db.command
+let num = 0
 Page({
 
   /**
@@ -13,9 +14,18 @@ Page({
     userInfo:[],
     moreUserinfo:{},
     myList:[],
+    rigthList:[],
     follow:[],
     beFollow:[],
-    like:[]
+    like:[],
+    num:0
+  },
+
+  //查看点赞的人
+  goLike(){
+    wx.navigateTo({
+      url: `/pages/like/like?userId=${wx.getStorageSync('openId')}`,
+    })
   },
 
   //点击切换
@@ -101,7 +111,9 @@ goLogin(){
   onReady: function () {
     db.collection("active").where({
       _openid:openId
-    }).watch({
+    })
+    .orderBy("createTime","desc")
+    .watch({
       onChange: (snapshot)=> {
         this.setData({
           rightList:snapshot.docs
@@ -112,9 +124,28 @@ goLogin(){
       }
     })
 
+    db.collection("appiontment").where({
+      _openid:openId
+    })
+    .orderBy("createTime","desc")
+    .watch({
+      onChange: (snapshot)=> {
+        console.log(snapshot);
+        
+        this.setData({
+          myList:snapshot.docs
+        })
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+
     db.collection("userlist").where({
       openid:openId
-    }).watch({
+    })
+    .orderBy("createTime","desc")
+    .watch({
       onChange: (snapshot)=> {
         let foo = snapshot.docs[0]
         this.setData({
@@ -126,7 +157,39 @@ goLogin(){
         console.error('the watch closed because of error', err)
       }
     })
+
+    new Promise((resolve,reject)=>{
+      db.collection("appiontment").where({
+        like:_.in([openId])
+      }).watch({
+        onChange: (snapshot)=> {
+          console.log(snapshot.docs.length);
+          num=num+snapshot.docs.length
+          resolve()
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
+        }
+      })
+    }).then(res=>{
+      db.collection("active").where({
+        like:_.in([openId])
+      }).watch({
+        onChange: (snapshot)=> {
+          console.log(snapshot.docs.length);
+          num=num+snapshot.docs.length
+          this.setData({
+            num
+          })
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
+        }
+      })
+    })
   },
+
+  
 
   /**
    * 生命周期函数--监听页面显示
@@ -139,20 +202,20 @@ goLogin(){
       })
     }
 
-    wx.cloud.callFunction({
-      name:"appiontment",
-      data:{
-        $url:"myAppiontment",
-        openId,
-        start:this.data.myList.length,
-        count:10
-      }
-    }).then(res=>{
-      console.log(res);
-      this.setData({
-        myList:this.data.myList.concat(res.result.data)
-      })
-    })
+    // wx.cloud.callFunction({
+    //   name:"appiontment",
+    //   data:{
+    //     $url:"myAppiontment",
+    //     openId,
+    //     start:this.data.myList.length,
+    //     count:10
+    //   }
+    // }).then(res=>{
+    //   console.log(res);
+    //   this.setData({
+    //     myList:this.data.myList.concat(res.result.data)
+    //   })
+    // })
   },
 
   /**

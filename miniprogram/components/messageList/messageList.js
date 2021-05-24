@@ -34,9 +34,13 @@ Component({
    */
   methods: {
     gomessage(e){
-      
       wx.navigateTo({
         url: `/pages/messageDetail/messageDetail?userId=${e.currentTarget.dataset.userid}`,
+      })
+    },
+    goUser(e){
+      wx.navigateTo({
+        url: `/pages/user/user?userId=${e.currentTarget.dataset.userid}`,
       })
     }
   }

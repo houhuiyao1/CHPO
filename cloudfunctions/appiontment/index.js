@@ -32,38 +32,35 @@ exports.main = async (event, context) => {
       return res
     })
     //评论查询
-    const appiontmentCount = await db.collection("appiontmentComment").count()
-    const total = appiontmentCount.total
-    let commentList = {
-      data:[]
-    }
-    if(total > 0){
-      const batchTimes = Math.ceil(total/100)
-      console.log(batchTimes);
+    // const appiontmentCount = await db.collection("appiontmentComment").count()
+    // const total = appiontmentCount.total
+    // let commentList = {
+    //   data:[]
+    // }
+    // if(total > 0){
+    //   const batchTimes = Math.ceil(total/100)
+    //   console.log(batchTimes);
       
-      const tasks = []
-      for(let i = 0;i<batchTimes;i++){
-        let promise = db.collection("appiontmentComment").skip(i*100).limit(100)
-        .where({
-          appiontmentId:event.id
-        })
-        .orderBy('createTime','desc')
-        .get()
-        tasks.push(promise)
-      } 
-      if(tasks.length > 0){
-        commentList =  (await Promise.all(tasks)).reduce((acc,cur)=>{
-          return {
-            data:acc.data.concat(cur.data)
-          }
-        })
-      }
-    }
+    //   const tasks = []
+    //   for(let i = 0;i<batchTimes;i++){
+    //     let promise = db.collection("appiontmentComment").skip(i*100).limit(100)
+    //     .where({
+    //       appiontmentId:event.id
+    //     })
+    //     .orderBy('createTime','desc')
+    //     .get()
+    //     tasks.push(promise)
+    //   } 
+    //   if(tasks.length > 0){
+    //     commentList =  (await Promise.all(tasks)).reduce((acc,cur)=>{
+    //       return {
+    //         data:acc.data.concat(cur.data)
+    //       }
+    //     })
+    //   }
+    // }
 
-    ctx.body = {
-      appiontmentDetail,
-      commentList
-    }
+    ctx.body = appiontmentDetail
   })
 
   app.router("myAppiontment",async(ctx,next)=>{
@@ -102,6 +99,21 @@ exports.main = async (event, context) => {
         islike:false
       }
     })
+  })
+
+  //获取点赞内容
+  app.router("likeList",async(ctx,next)=>{
+    let likeList = await db.collection("appiontment").where({
+      like:_.in([event.userId])
+    })
+    .skip(event.start)
+    .limit(event.count)
+    .orderBy("createTime","desc")
+    .get()
+    .then(res=>{
+      return res
+    })
+    ctx.body = likeList
   })
 
   //获取搜索内容

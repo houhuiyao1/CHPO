@@ -18,6 +18,21 @@ Page({
     islikeArr:[]
   },
 
+  //预览图片
+  previewImage(e){
+    wx.previewImage({
+      urls: this.data.list[0].img,
+      current:e.target.dataset.imagesrc
+    })
+  },
+
+  //加载用户详情
+  userDetail(e){
+    wx.navigateTo({
+      url: `/pages/user/user?userId=${e.currentTarget.dataset.userid}`,
+    })
+  },
+  
   islike(){
     this.setData({
       islike:!this.data.islike

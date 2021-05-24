@@ -8,6 +8,10 @@ Component({
       type:Array,
       value:[]
     },
+    rightList:{
+      type:Array,
+      value:[]
+    },
     s_leftList:{
       type:Array,
       value:[]

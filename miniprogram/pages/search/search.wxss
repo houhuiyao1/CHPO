@@ -6,7 +6,7 @@
   align-items: center;
   position: fixed;
   left: 0;
-  top: 30rpx;
+  top: 70rpx;
 }
 
 .return{
@@ -18,7 +18,8 @@
   text-align: center;
   line-height: 100rpx;
   height: 100rpx;
-  margin: 30rpx auto;
+  margin-top: 70rpx;
+  margin-bottom: 20rpx;
 }
 
 .search{

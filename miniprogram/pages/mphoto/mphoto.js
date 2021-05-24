@@ -34,6 +34,16 @@ Page({
     })
   },
 
+  morepg(){
+    wx.navigateTo({
+      url: `/pages/userList/userList?`,
+    })
+  },
+
+  moreph(){
+
+  },
+
   goDetail(e){
     console.log(e);
     
@@ -61,7 +71,6 @@ Page({
 
   //加载用户详情
   userDetail(e){
-    
     wx.navigateTo({
       url: `/pages/user/user?userId=${e.currentTarget.dataset.userid}`,
     })
