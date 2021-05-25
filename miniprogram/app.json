@@ -14,6 +14,11 @@
     "pages/search/search",
     "pages/like/like"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于查询同校约拍信息" 
+    }
+  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",

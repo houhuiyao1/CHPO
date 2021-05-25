@@ -2,6 +2,7 @@ let openId = ''
 let photographId = ""
 let userInfo = ''
 let moreUserinfo = ''
+let key = 'UZLBZ-WVLHR-ZDSWI-WXLYJ-YVT55-YQFJT'
 Page({
 
   /**
@@ -67,6 +68,31 @@ Page({
     openId = wx.getStorageSync('openId')
     this.loadList()
     this.loadSchoolList()
+
+    wx.getLocation({
+      type: 'wgs84',
+
+      success (res) {
+        const latitude = res.latitude
+        const longitude = res.longitude
+        const speed = res.speed
+        const accuracy = res.accuracy
+        console.log(latitude);
+        console.log(longitude);
+        console.log(accuracy);
+        
+
+        wx.request({
+          url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${key}`,
+          success(res){
+            console.log(res);
+            
+          }
+        })
+        
+      }
+     })
+     
   },
 
   //加载用户详情

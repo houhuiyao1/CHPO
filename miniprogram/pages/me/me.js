@@ -164,6 +164,7 @@ goLogin(){
       }).watch({
         onChange: (snapshot)=> {
           console.log(snapshot.docs.length);
+          num = 0
           num=num+snapshot.docs.length
           resolve()
         },
