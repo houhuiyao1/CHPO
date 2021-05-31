@@ -11,10 +11,9 @@
       >[图片]</view>
 
     </view>
-    
 </view>
 
-<view wx:for="{{userList}}" wx:key="*this" class="list" data-userId = "{{item.data[0].openid}}" bindtap="goUser" wx:if="{{userList}}">
+<view wx:for="{{userList}}" wx:key="*this" class="list" data-userId = "{{item.data[0].openid}}" bindtap="goUser" wx:if="{{userList[0].data[0]}}">
   <image src="{{item.data[0].avatarUrl}}" class="head" mode="widthFix"></image>
   <view class="nm">
     <view class="name">{{item.data[0].nickName}}</view>

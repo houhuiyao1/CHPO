@@ -15,6 +15,10 @@ Component({
     likeArrcount:{
       type:Array,
       value:[]
+    },
+    commentCount:{
+      type:Array,
+      value:[]
     }
   },
 

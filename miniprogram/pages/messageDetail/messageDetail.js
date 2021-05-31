@@ -15,7 +15,7 @@ Page({
   data: {
     content:"",
     messageList:[],
-    toView:0,
+    toView:'msg_0',
     sendHeight:0,
     img:''
   },

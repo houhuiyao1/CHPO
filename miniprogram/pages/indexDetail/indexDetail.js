@@ -16,7 +16,10 @@ Page({
     nolikeUrl:"../../images/icon/like.png",
     likeUrl:"../../images/icon/like1.png",
     islike:false,
-    islikeArr:[]
+    islikeArr:[],
+    animation:'',
+    black:'',
+    talkHeadphoto:'../../images/icon/noLogin.png'
   },
 
   //预览图片
@@ -36,6 +39,14 @@ Page({
 
   //点赞
   islike(){
+    if(openId == ''){
+      this.setData({
+        animation:'animation',
+        black:'black'
+      })
+      return
+    }
+
     this.setData({
       islike:!this.data.islike
     })
@@ -71,6 +82,33 @@ Page({
 
   },
 
+  //删除此列表
+  delectDetail(e){
+    wx.showModal({
+      title: '是否要删除',
+      icon:"none",
+      success:(res)=>{
+        if (res.confirm) {
+          wx.cloud.callFunction({
+            name:"appiontment",
+            data:{
+              $url:"delectAppiontment",
+              id:e.currentTarget.dataset.id
+            }
+          })
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      },
+      fail:()=>{
+        // wx.hideToast()
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -79,6 +117,9 @@ Page({
     moreUserinfo = wx.getStorageSync('moreUserinfo')
     openId = wx.getStorageSync('openId')
     id = options.id
+    this.setData({
+      openId
+    })
     //展示内容
     wx.showLoading({
       title: '拼命加载中',
@@ -123,6 +164,14 @@ Page({
   },
 
   send(e){
+    if(openId == ''){
+      this.setData({
+        animation:'animation',
+        black:'black'
+      })
+      return
+    }
+
     wx.showLoading({
       title: '正在发送',
     })
@@ -167,46 +216,56 @@ Page({
 
   },
 
-  // send(e){
-  //   wx.showLoading({
-  //     title: '正在发送',
-  //   })
-  //   db.collection('appiontmentComment').add({
-  //     data:{
-  //       appiontmentId:this.data.id,
-  //       comment:e.detail.value,
-  //       userInfo,
-  //       moreUserinfo,
-  //       createTime:db.serverDate()
-  //     }
-  //   })
+  delect(){
+    this.setData({
+      animation:'',
+      black:''
+    })
+  },
 
-  //   //实时获取评论信息
-  //   wx.cloud.callFunction({
-  //     name:"appiontment",
-  //     data:{
-  //       $url:"appiontmentDetail",
-  //       id:this.data.id,
-  //       userInfo,
-  //       moreUserinfo,
-  //       openId
-  //     }
-  //    }).then((res)=>{
-  //      wx.hideLoading()
-  //      wx.showToast({
-  //        title: '评论成功',
-  //        icon:"none"
-  //      })
-  //      let len = res.result.commentList.data.length
-  //      for(let i = 0;i < len;i++){
-  //        res.result.commentList.data[i].createTime = res.result.commentList.data[i].createTime.substring(0,10)
-  //      }
-  //      this.setData({
-  //        commentList:res.result.commentList.data,
-  //      })
-  //     })
-  // },
+  getUserinfo(e){
+    wx.getUserProfile({
+      desc: '获取用户信息',
+      success: (res) => {   
+        const userInfo = res.userInfo
+        wx.setStorageSync('userInfo', userInfo)
 
+        const province = wx.getStorageSync('province')
+        const city = wx.getStorageSync('city')
+        this.setData({
+          userInfo,
+          animation:'',
+          black:''
+        })
+        this.goLogin()
+
+        //向数据库增添用户
+      wx.cloud.callFunction({
+      name:"userList",
+      data:{
+        $url:"getUserinfo",
+        nickName:this.data.userInfo.nickName,
+        avatarUrl:this.data.userInfo.avatarUrl,
+        province,
+        city
+      }
+      }).then(res => {
+        wx.setStorageSync('openId', res.result.data.openId)
+        openId = wx.getStorageSync('openId')
+        this.onReady()
+      })
+      }
+    })
+  },
+
+  //完善资料
+  goLogin(){
+    const headphoto = this.data.userInfo.avatarUrl
+    const name = this.data.userInfo.nickName
+    wx.navigateTo({
+    url: `/pages/login/login?nickName=${name}&photo=${headphoto}`
+    })
+  },
   
 
   /**

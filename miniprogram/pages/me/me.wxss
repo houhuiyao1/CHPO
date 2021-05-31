@@ -10,6 +10,15 @@ page{
   position: relative;
 }
 
+.backImg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 350rpx;
+  z-index: -1;
+}
+
 .headphoto{
   width: 160rpx;
   height: 160rpx;
@@ -141,4 +150,8 @@ page{
 
 .bottomCon{
   height: 60vh;
+}
+
+.active{
+  font-weight: 600;
 }

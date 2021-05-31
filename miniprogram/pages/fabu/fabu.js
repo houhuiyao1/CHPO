@@ -6,6 +6,10 @@ let content = ""
 let userInfo = ""
 let moreUserinfo = ""
 let label = []
+let province = ''
+let city = ''
+let labelName = ''
+let labelList = ''
 Page({
   /**
    * 页面的初始数据
@@ -16,6 +20,9 @@ Page({
     textNums:0,
     imageList:[],
     selectImage:false,
+    animation:'',
+    black:'',
+    showInput:'',
     labelList:[
       {
         name:"毕业季",
@@ -69,13 +76,24 @@ Page({
 
   //选择标签
   getlabel(e){
-    let item = e.target.dataset.item
     let index = e.target.dataset.index
     
     this.data.labelList[index].tag = !this.data.labelList[index].tag
     this.setData({
       labelList:this.data.labelList
     })
+    let labelArr = []
+    for(let j = 0;j < this.data.labelList.length;j++){
+      if(this.data.labelList[j].tag == true){
+        labelArr.push(true)
+      }
+    }
+    if(labelArr.length > 3){
+      wx.showToast({
+        title: '只会显示前三个标签哦',
+        icon:'none'
+      })
+    }
   },
 
   //删除图片
@@ -118,6 +136,7 @@ Page({
     label = []
     for(let it of this.data.labelList){
       it.tag === true?label.push(it.name):""
+      if(label.length === 3)break
     }
     
     if(this.data.tag){
@@ -156,6 +175,8 @@ Page({
         data:{
           userInfo:userInfo,
           moreUserinfo,
+          province,
+          city,
           content,
           img:fileId,
           createTime:db.serverDate(),
@@ -212,6 +233,8 @@ Page({
         data:{
           userInfo:userInfo,
           moreUserinfo,
+          province,
+          city,
           content,
           img:fileId,
           createTime:db.serverDate(),
@@ -249,6 +272,79 @@ Page({
     })
   },
 
+  delect(){
+    this.setData({
+      animation:'',
+      black:''
+    })
+  },
+
+  getUserinfo(e){
+    wx.getUserProfile({
+      desc: '获取用户信息',
+      success: (res) => {   
+        const userInfo = res.userInfo
+        wx.setStorageSync('userInfo', userInfo)
+
+        const province = wx.getStorageSync('province')
+        const city = wx.getStorageSync('city')
+        this.setData({
+          userInfo,
+          animation:'',
+          black:''
+        })
+        this.goLogin()
+
+        //向数据库增添用户
+      wx.cloud.callFunction({
+      name:"userList",
+      data:{
+        $url:"getUserinfo",
+        nickName:this.data.userInfo.nickName,
+        avatarUrl:this.data.userInfo.avatarUrl,
+        province,
+        city
+      }
+      }).then(res => {
+        wx.setStorageSync('openId', res.result.data.openId)
+        openId = wx.getStorageSync('openId')
+        this.onReady()
+      })
+      }
+    })
+  },
+
+  //完善资料
+  goLogin(){
+    const headphoto = this.data.userInfo.avatarUrl
+    const name = this.data.userInfo.nickName
+    wx.navigateTo({
+    url: `/pages/login/login?nickName=${name}&photo=${headphoto}`
+    })
+  },
+
+  addLabel(){
+    this.setData({
+      showInput:'showInput'
+    })
+  },
+
+  labelInput(e){
+    labelName = e.detail.value
+  },
+
+  sendLabel(){
+    this.setData({
+      labelList:this.data.labelList.concat({
+        name:labelName,
+        index:this.data.labelList.length,
+        tag:false
+      }),
+      showInput:''
+    })
+    wx.setStorageSync('labelList', this.data.labelList)
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -270,6 +366,26 @@ Page({
     openId = wx.getStorageSync('openId')
     userInfo = wx.getStorageSync('userInfo')
     moreUserinfo = wx.getStorageSync('moreUserinfo')
+    province = wx.getStorageSync('province')
+    city = wx.getStorageSync('city')
+    this.setData({
+      province,
+      city
+    })
+    labelList = wx.getStorageSync('labelList')
+    if(labelList !== ''){
+      this.setData({
+        labelList
+      })
+    }
+
+    if(openId == ''){
+      this.setData({
+        animation:'animation',
+        black:'black'
+      })
+      return
+    }
   },
 
   /**

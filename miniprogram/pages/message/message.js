@@ -46,7 +46,27 @@ Page({
    */
   onLoad: function (options) {
     openId = wx.getStorageSync('openId')
-    this.loadmessageList()
+
+    wx.showLoading({
+      title: '拼命加载中',
+    })
+    userArr = []
+      for(let it of arr){
+        userArr.push(it.userId)
+      }
+      wx.cloud.callFunction({
+        name:"userList",
+        data:{
+          $url:"messageUserArr",
+          userArr
+        }
+      }).then(res=>{
+        console.log(res);
+        wx.hideLoading()
+        this.setData({
+          messageUserList:res.result
+        })
+      })
   },
 
   /**
@@ -61,7 +81,7 @@ Page({
    */
   onShow: function () {
     
-    p = new Promise((resolve,rejects)=>{
+    new Promise((resolve,rejects)=>{
       wx.cloud.callFunction({
         name:"messageList",
         data:{
@@ -83,9 +103,7 @@ Page({
         })
         resolve()
     })
-  })
-  console.log(p);
-  p.then(res=>{
+  }).then(res=>{
     this.loadmessageList()
   })
   },

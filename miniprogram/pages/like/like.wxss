@@ -1,1 +1,19 @@
-/* miniprogram/pages/like/like.wxss */
+.checkBox{
+  width: 100vw;
+  height: 80rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1rpx rgb(207, 203, 203) solid;
+}
+
+.check{
+  font-size: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active{
+  color: #2CD18A;
+}

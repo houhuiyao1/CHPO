@@ -65,3 +65,25 @@
   font-size: 22rpx;
   margin-left: 5rpx;
 }
+
+.labelBox{
+  display: flex;
+  clear: both;
+  position: absolute;
+  top: 10rpx;
+  left: 0;
+  width: 100%;
+}
+
+.label{
+  width: 70rpx;
+  height: 30rpx;
+  font-size: 18rpx;
+  background-color: #85dca7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 20rpx;
+  margin-left: 8rpx;
+}

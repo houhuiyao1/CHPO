@@ -6,5 +6,7 @@
   <view class="bottom">
     <view class="icon"><image src="{{likeArr[index]?likeUrl:nolikeUrl}}" class="image"></image><view>{{likeCount[index]}}</view></view>
     <view class="icon"><image src="../../images/icon/talk.png" class="image"></image><view>{{commentCount[index]}}</view></view>
+
+    <view class="school">{{list[index].province}}{{list[index].moreUserinfo.school}}</view>
   </view>
 </view>

@@ -7,11 +7,27 @@ Page({
    * 页面的初始数据
    */
   data: {
+    currentIndex:0,
+    check:["动态","约拍"],
     likeList:[],
     centerList:[],
     leftList:[],
     app_height:0,
     act_height:0
+  },
+
+  //点击切换
+  change(e){
+    this.setData({
+      currentIndex:e.currentTarget.dataset.index
+    })
+  },
+
+  //滑动切换
+  curChange(e){
+    this.setData({
+      currentIndex:e.detail.current
+    })
   },
 
   loadAppiontmentList(){
@@ -24,10 +40,12 @@ Page({
         count:5
       }
     }).then(res=>{
+      console.log(res);
+      
       console.log(res.result.data);
       this.setData({
         leftList:this.data.leftList.concat(res.result.data),
-        app_height:res.result.data.length * 315
+        app_height:res.result.data.length * 320
       })
     })
   },
@@ -45,7 +63,7 @@ Page({
       console.log(res);
       this.setData({
         centerList:this.data.centerList.concat(res.result.data),
-        act_height:res.result.data.length * 315
+        act_height:res.result.data.length * 320
       })
     })
   },

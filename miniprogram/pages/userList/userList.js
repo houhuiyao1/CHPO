@@ -24,7 +24,6 @@ Page({
         userList:options.list.split(",")
       }
     }).then(res=>{
-      console.log(res.result);
       this.setData({
         userList:res.result
       })

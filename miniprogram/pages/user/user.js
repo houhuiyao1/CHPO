@@ -2,6 +2,7 @@ let userId = ''
 let openId = ''
 const db = wx.cloud.database()
 const _ = db.command
+let num = 0
 Page({
 
   /**
@@ -18,7 +19,11 @@ Page({
     beFollowArr:[],
     follow:[],
     beFollow:[],
-    like:[]
+    like:[],
+    backgroundImg:"../../images/one.jpg",
+    animation:'',
+    black:'',
+    num : 0
   },
 
   //点击切换
@@ -49,8 +54,22 @@ Page({
     })
   },
 
+  delect(){
+    this.setData({
+      animation:'',
+      black:''
+    })
+  },
   
   follow(e){
+    if(openId == ''){
+      this.setData({
+        animation:'animation',
+        black:'black'
+      })
+      return
+    }
+
     if(this.data.isfollow){
       this.setData({
         isfollow:!this.data.isfollow
@@ -127,8 +146,65 @@ Page({
     }
   },
 
-  goMessage(e){
+  getUserinfo(e){
+    wx.getUserProfile({
+      desc: '获取用户信息',
+      success: (res) => {   
+        const userInfo = res.userInfo
+        wx.setStorageSync('userInfo', userInfo)
 
+        const province = wx.getStorageSync('province')
+        const city = wx.getStorageSync('city')
+        this.setData({
+          userInfo,
+          animation:'',
+          black:''
+        })
+        this.goLogin()
+
+        //向数据库增添用户
+      wx.cloud.callFunction({
+      name:"userList",
+      data:{
+        $url:"getUserinfo",
+        nickName:this.data.userInfo.nickName,
+        avatarUrl:this.data.userInfo.avatarUrl,
+        province,
+        city
+      }
+      }).then(res => {
+        wx.setStorageSync('openId', res.result.data.openId)
+        openId = wx.getStorageSync('openId')
+        this.onReady()
+      })
+      }
+    })
+  },
+
+  //完善资料
+  goLogin(){
+    const headphoto = this.data.userInfo.avatarUrl
+    const name = this.data.userInfo.nickName
+    wx.navigateTo({
+    url: `/pages/login/login?nickName=${name}&photo=${headphoto}`
+    })
+  },
+
+   //查看点赞的人
+   goLike(){
+    wx.navigateTo({
+      url: `/pages/like/like?userId=${userId}`,
+    })
+  },
+
+  goMessage(e){
+    if(openId == ''){
+      this.setData({
+        animation:'animation',
+        black:'black'
+      })
+      return
+    }
     wx.navigateTo({
       url: `/pages/messageDetail/messageDetail?userId=${e.target.dataset.userid}`,
     })
@@ -138,6 +214,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.userId);
+    
     userId = options.userId
     openId = wx.getStorageSync('openId')
     db.collection("userlist").where({
@@ -147,7 +225,9 @@ Page({
     .then(res =>{
       this.setData({
         userList:res.data[0],
-        beFollowArr:res.data[0].beFollow
+        backgroundImg:res.data[0].backgroundImg,
+        beFollowArr:res.data[0].beFollow,
+        backgroundImg:res.data[0].backgroundImg
       })
     })
 
@@ -156,8 +236,6 @@ Page({
     })
     .get()
     .then(res =>{
-      console.log(res);
-      
       if(res.data[0].follow.indexOf(userId) < 0){
         this.setData({
           followArr:res.data[0].follow,
@@ -170,7 +248,6 @@ Page({
         })
       }
     })
-
   },
 
   /**
@@ -181,7 +258,6 @@ Page({
       _openid:userId
     }).watch({
       onChange: (snapshot)=> {
-        console.log(snapshot.docs);
         this.setData({
           rightList:snapshot.docs
         })
@@ -195,7 +271,6 @@ Page({
       _openid:userId
     }).watch({
       onChange: (snapshot)=> {
-        console.log(snapshot.docs);
         this.setData({
           myList:snapshot.docs
         })
@@ -218,6 +293,35 @@ Page({
       onError: function(err) {
         console.error('the watch closed because of error', err)
       }
+    })
+
+    new Promise((resolve,reject)=>{
+      db.collection("appiontment").where({
+        like:_.in([userId])
+      }).watch({
+        onChange: (snapshot)=> {
+          num = 0
+          num=num+snapshot.docs.length
+          resolve()
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
+        }
+      })
+    }).then(res=>{
+      db.collection("active").where({
+        like:_.in([userId])
+      }).watch({
+        onChange: (snapshot)=> {
+          num=num+snapshot.docs.length
+          this.setData({
+            num
+          })
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
+        }
+      })
     })
   },
 

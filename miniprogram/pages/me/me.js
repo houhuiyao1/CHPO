@@ -3,6 +3,9 @@ const app = getApp()
 const db = wx.cloud.database()
 const _ = db.command
 let num = 0
+let province = ''
+let city = ''
+let fileId = ''
 Page({
 
   /**
@@ -18,7 +21,71 @@ Page({
     follow:[],
     beFollow:[],
     like:[],
-    num:0
+    num:0,
+    Img:"../../images/one.jpg"
+  },
+
+  //切换背景图
+  changeImg(e){
+    let p = new Promise((resolve,reject)=>{
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success :(res) =>{
+          console.log(res.tempFilePaths);
+          this.setData({
+            Img:res.tempFilePaths[0]
+          })
+          wx.setStorageSync('backImg', res.tempFilePaths)
+          let item = this.data.Img
+          let suffix = /\.\w+$/.exec(item)
+          wx.cloud.uploadFile({
+            cloudPath:`userlist/${Date.now()}-${Math.random()*1000}${suffix}`,
+            filePath:item,
+            success:(res)=>{ 
+              fileId=res.fileID
+              resolve(fileId)
+            },
+            fail:(err)=>{
+              console.log(err); 
+            }
+          })        
+        }
+      })
+    })
+
+    p.then(res=>{
+      console.log(res);
+      wx.cloud.callFunction({
+        name:"userList",
+        data:{
+          $url:"backImg",
+          img:res,
+          openId
+        }
+      })
+      
+      // this.setData({
+      //   Img:res
+      // })
+    })
+  },
+
+  //上传图片
+  uploadImg(){
+      let item = this.data.Img
+      let suffix = /\.\w+$/.exec(item)
+      wx.cloud.uploadFile({
+        cloudPath:`userlist/${Date.now()}-${Math.random()*1000}${suffix}`,
+        filePath:item,
+        success:(res)=>{ 
+          fileId=res.fileID
+        },
+        fail:(err)=>{
+          console.log(err); 
+        }
+      })
   },
 
   //查看点赞的人
@@ -32,7 +99,7 @@ Page({
   change(e){
     this.setData({
       currentIndex:e.target.dataset.index
-    })
+    }) 
   },
 
   //滑动切换
@@ -62,9 +129,13 @@ Page({
     success: (res) => {   
       const userInfo = res.userInfo
       wx.setStorageSync('userInfo', userInfo)
+
+      const province = wx.getStorageSync('province')
+      const city = wx.getStorageSync('city')
       this.setData({
         userInfo
       })
+      this.goLogin()
 
       //向数据库增添用户
     wx.cloud.callFunction({
@@ -72,15 +143,17 @@ Page({
     data:{
       $url:"getUserinfo",
       nickName:this.data.userInfo.nickName,
-      avatarUrl:this.data.userInfo.avatarUrl
+      avatarUrl:this.data.userInfo.avatarUrl,
+      province,
+      city
     }
     }).then(res => {
       wx.setStorageSync('openId', res.result.data.openId)
       openId = wx.getStorageSync('openId')
+      this.onReady()
     })
     }
   })
-
 },
 
 //完善资料
@@ -130,8 +203,6 @@ goLogin(){
     .orderBy("createTime","desc")
     .watch({
       onChange: (snapshot)=> {
-        console.log(snapshot);
-        
         this.setData({
           myList:snapshot.docs
         })
@@ -146,7 +217,7 @@ goLogin(){
     })
     .orderBy("createTime","desc")
     .watch({
-      onChange: (snapshot)=> {
+      onChange: (snapshot)=> {   
         let foo = snapshot.docs[0]
         this.setData({
           follow:foo.follow,
@@ -157,6 +228,29 @@ goLogin(){
         console.error('the watch closed because of error', err)
       }
     })
+
+  },
+
+  
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var moreUserinfo = wx.getStorageSync('moreUserinfo')
+    var userinfo = wx.getStorageSync('userInfo')
+    var Img = wx.getStorageSync('backImg')
+    if(moreUserinfo !== ""){
+      this.setData({
+        moreUserinfo,
+        userinfo
+      })
+    }
+    if(Img !== ""){
+      this.setData({
+        Img
+      })
+    }
 
     new Promise((resolve,reject)=>{
       db.collection("appiontment").where({
@@ -188,35 +282,7 @@ goLogin(){
         }
       })
     })
-  },
 
-  
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var moreUserinfo = wx.getStorageSync('moreUserinfo')
-    if(moreUserinfo !== ""){
-      this.setData({
-        moreUserinfo
-      })
-    }
-
-    // wx.cloud.callFunction({
-    //   name:"appiontment",
-    //   data:{
-    //     $url:"myAppiontment",
-    //     openId,
-    //     start:this.data.myList.length,
-    //     count:10
-    //   }
-    // }).then(res=>{
-    //   console.log(res);
-    //   this.setData({
-    //     myList:this.data.myList.concat(res.result.data)
-    //   })
-    // })
   },
 
   /**

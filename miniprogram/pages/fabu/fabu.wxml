@@ -14,7 +14,6 @@
         class="mainImage" 
         bindtap="previewImage" 
         data-imagesrc="{{item}}"></image>
-        
         <image src="../../images/icon/delect.png" 
         class="delect" 
         bindtap="delectImage"
@@ -27,6 +26,11 @@
   </view>
 
   <view class="textNums">{{textNums}}/150</view>
+</view>
+
+<view class="local">
+  <image src="../../images/icon/local1.png" class="localImg"></image>
+  <view class="localText">{{province}}·{{city}}</view>
 </view>
 
 <view class="select">
@@ -46,4 +50,17 @@
   data-index="{{index}}"
   wx:for="{{labelList}}"
   wx:key="index">{{item.name}}</view>
+  <image src="../../images/icon/addLabel.png" class="addLabel" bindtap="addLabel"></image>
 </view>
+
+<view class="{{black}}"></view>
+<view class="bottomLogin {{animation}}">
+  <button bindtap="getUserinfo" class="loginButton">授权登录</button>
+</view>
+
+<view class="bottomInput {{showInput}}">
+  <view class="labelText">请输入标签名称</view>
+  <input type="text" bindinput="labelInput" bindconfirm='sendLabel'></input>
+</view>
+
+

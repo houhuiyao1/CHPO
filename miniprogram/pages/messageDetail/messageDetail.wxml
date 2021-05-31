@@ -17,10 +17,12 @@ style="height:{{scrollHeight}}">
   </view>
   <view class="leftBox mess" wx:if="{{item.openId === userId}}" data-msg = "{{index}}" id='msg_{{index}}'>
     <text  class="left message" wx:if="{{item.type=='text'}}">{{item.content}}</text>
-    <image src="{{item.content}}" wx:if="{{item.type=='image'}}" class="l_img"></image>
+    <image src="{{item.content}}" wx:if="{{item.type=='image'}}" class="l_img" mode="widthFix"></image>
   </view>
 </block>
 </scroll-view>
+
+
 
 <view class="bottom" style="bottom:{{sendHeight}}rpx">
   <input type="text" 

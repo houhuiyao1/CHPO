@@ -6,7 +6,15 @@ page{
   position: relative;
   background-color: #F9FAFC;
   padding: 10rpx;
-  margin-bottom: 15rpx;
+  margin-bottom: 10rpx;
+}
+
+.container:after{
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }
 
 .textarea{
@@ -46,14 +54,6 @@ page{
   margin:5rpx;
 }
 
-.container:after{
-  content: "";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
 .addimage image{
   width: 30%;
   height: 30%;
@@ -66,12 +66,30 @@ page{
   right: 15rpx;
 }
 
+.local{
+  float: left;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin: 10rpx 5rpx;
+}
+
+.localImg{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.localText{
+  font-size: 28rpx;
+}
+
 .select{
   width: 280rpx;
   display: flex;
   justify-content: space-around;
   align-items: center;
   float: left;
+  clear: both;
 }
 
 .button{
@@ -99,13 +117,15 @@ page{
 
 .labelBox{
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  align-items: center;
   float: left;
   clear: both;
+  flex-wrap: wrap;
+  width: 70vw;
 }
 
 .label{
-  width: 80rpx;
   height: 40rpx;
   font-size: 20rpx;
   background-color: #C6CCDA;
@@ -115,8 +135,104 @@ page{
   color: white;
   border-radius: 20rpx;
   margin: 20rpx 12rpx;
+  padding: 0 12rpx;
+}
+
+.addLabel{
+  width: 60rpx;
+  height: 60rpx;
 }
 
 .active{
+  background-color: #85dca7;
+}
+
+.bottomLogin{
+  width: 100vw;
+  height: 0rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-radius: 50rpx 50rpx 0 0;
+  overflow: hidden;
+  background-color: white ;
+  z-index: 100;
+}
+
+.delect{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+
+.loginButton{
+  width: 200rpx;
+  height: 80rpx;
   background-color: #2CD18A;
+  color: white;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@keyframes mymove
+{
+    1% {height:0px;}
+    100%{height:300rpx;}
+}
+
+.animation{
+  animation:mymove 0.3s linear;
+  height:250rpx
+}
+
+.black{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 8;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(95, 91, 91);
+  opacity: 0.5;
+}
+
+.bottomInput{
+  width: 100vw;
+  height: 0rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-radius: 50rpx 50rpx 0 0;
+  overflow: hidden;
+  background-color: white ;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottomInput input{
+  border: 2rpx #85dca7 solid;
+  height: 60rpx;
+  width: 90vw;
+  border-radius: 10rpx;
+}
+
+.labelText{
+  position: absolute;
+  top: 45rpx;
+  left: 45rpx;
+}
+
+.showInput{
+  animation:mymove 0.3s linear;
+  height:250rpx;
+  background-color: white;
+  position: relative;
 }

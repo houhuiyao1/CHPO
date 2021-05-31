@@ -45,7 +45,7 @@
   width: 70rpx;
   height: 30rpx;
   font-size: 18rpx;
-  background-color: #2CD18A;
+  background-color: #85dca7;
   display: flex;
   justify-content: center;
   align-items: center;

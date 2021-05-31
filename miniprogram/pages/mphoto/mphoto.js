@@ -21,6 +21,33 @@ Page({
     schoolcommentCount:[]
   },
 
+  //获取当前定位
+  getLocal(){
+    wx.getLocation({
+      type: 'wgs84',
+      success:(res)=>{
+        const latitude = res.latitude
+        const longitude = res.longitude
+
+        wx.request({
+          url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${key}`,
+          success:res=>{
+            const p = res.data.result.address_component.province
+            const c = res.data.result.address_component.city
+            const province = p.substring(0,p.length-1)
+            const city = c.substring(0,c.length-1)
+            wx.setStorageSync('province', province)
+            wx.setStorageSync('city', city)
+            this.setData({
+              province,
+              city
+            })
+          }
+        })
+      }
+     })
+  },
+
   //点击切换
   change(e){
     this.setData({
@@ -46,8 +73,6 @@ Page({
   },
 
   goDetail(e){
-    console.log(e);
-    
     wx.navigateTo({
       url: `/pages/appiontmentDetail/appiontmentDetail?id=${e.currentTarget.dataset.id}`,
     })
@@ -69,30 +94,7 @@ Page({
     this.loadList()
     this.loadSchoolList()
 
-    wx.getLocation({
-      type: 'wgs84',
-
-      success (res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
-        const speed = res.speed
-        const accuracy = res.accuracy
-        console.log(latitude);
-        console.log(longitude);
-        console.log(accuracy);
-        
-
-        wx.request({
-          url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${key}`,
-          success(res){
-            console.log(res);
-            
-          }
-        })
-        
-      }
-     })
-     
+    this.getLocal()     
   },
 
   //加载用户详情
@@ -107,10 +109,9 @@ Page({
       name:"userList",
       data:{
         $url:"schoolPhotograph",
-        school:userInfo.school
+        school:moreUserinfo.school
       }
     }).then(res =>{
-
       this.setData({
         schoolPhotograph:res.result.data
       })
@@ -124,8 +125,6 @@ Page({
         $url:"photoGraph"
       }
     }).then(res =>{
-      console.log(res);
-      
       this.setData({
         photograph:res.result.data
       })
@@ -133,18 +132,22 @@ Page({
   },
 
   loadSchoolList(){
+    wx.showLoading({
+      title: '拼命加载中',
+    })
     wx.cloud.callFunction({
       name:"active",
       data:{
         $url:"schoolActive",
         school:moreUserinfo.school,
         start:this.data.schoollist.length,
-        count:10
+        count:6
       }
     }).then(res=>{
       this.setData({
-        schoollist:res.result.data
+        schoollist:this.data.schoollist.concat(res.result.data)
       })
+      wx.hideLoading()
     })
   },
 
@@ -157,16 +160,22 @@ Page({
       data:{
         $url:"active",
         start:this.data.list.length,
-        count:10
+        count:6
       }
     }).then((res)=>{
-      console.log(res);
-      
       this.setData({
-        list:res.result.data
+        list:this.data.list.concat(res.result.data)
       })
       wx.hideLoading()
     })
+  },
+
+  loadNext(e){
+    this.loadList()
+  },
+
+  loadschoolNext(){
+    this.loadSchoolList()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -179,6 +188,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    const province = wx.getStorageSync('province')
+    const city = wx.getStorageSync('city')
+    this.setData({
+      province,
+      city
+    })
 
     this.loadPhototgraph()
     this.loadSchoolPhototgraph()

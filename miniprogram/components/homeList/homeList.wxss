@@ -79,8 +79,8 @@
 
 .content{
   font-size: 24rpx;
-  text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -106,7 +106,7 @@
 
 .label{
   height: 40rpx;
-  background-color: #2CD18A;
+  background-color: #85dca7;
   display: flex;
   justify-content: center;
   align-items: center;

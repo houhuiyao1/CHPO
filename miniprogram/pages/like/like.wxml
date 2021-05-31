@@ -1,8 +1,16 @@
-<swiper style="height:{{app_height}}rpx">
-  <swiper-item >
+<view class="checkBox"> 
+  <view 
+  wx:for="{{check}}" 
+  wx:key="*this" 
+  class="check {{currentIndex == index?'active':''}}" 
+  data-index = '{{index}}' 
+  bindtap="change">{{item}}</view>
+</view>
+<swiper current="{{currentIndex}}" bindchange="curChange" style="height:{{act_height>app_height?act_height:app_height}}rpx">
+  <swiper-item style="height:{{act_height}}rpx">
     <mineList s_centerList='{{centerList}}'/>
   </swiper-item>
-  <swiper-item>
+  <swiper-item style="height:{{app_height}}rpx">
     <mineList s_leftList='{{leftList}}'/>
   </swiper-item>
 </swiper>

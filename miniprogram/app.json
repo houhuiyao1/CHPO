@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/mphoto/mphoto",
+    "pages/index/index",
     "pages/message/message",
     "pages/me/me",
     "pages/login/login",
@@ -16,7 +16,7 @@
   ],
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于查询同校约拍信息" 
+      "desc": "你的位置信息可以让同学更加了解你" 
     }
   },
   "window": {

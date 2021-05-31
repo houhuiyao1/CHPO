@@ -1,24 +1,23 @@
 <!-- 未授权 -->
 <block wx:if="{{!userInfo.nickName}}">
-<view class="contain" style="background:url(../../images/src=http_%2F%2Fwww.heiguang.com%2Fuploadfile%2F2016%2F0705%2F20160705094125264.jpg&refer=http_%2F%2Fwww.heiguang.jfif)"
-wx:if="{{!userInfo.nickName}}">
+<view class="contain" style="background:url(../../images/one.jpg}}">
 </view>
-<button bindtap="getUserinfo">
+  <button bindtap="getUserinfo" style="margin-top:20rpx;background-color:#2CD18A;color:white">
     登录
   </button>
 </block>
 
 <!-- 授权登录后 -->
-<view class="contain" style="background:url(../../images/src=http_%2F%2Fwww.heiguang.com%2Fuploadfile%2F2016%2F0705%2F20160705094125264.jpg&refer=http_%2F%2Fwww.heiguang.jfif)"
-wx:if="{{userInfo.nickName}}">
-  <view class="follow simg">
+<view class="contain" wx:if="{{userInfo.nickName}}" bindtap="changeImg">
+  <image src="{{Img}}" class="backImg" mode="aspectFill"></image>
+  <!-- <view class="follow simg">
     <image src="../../images/icon/follow(1).png"></image>
-  </view>
+  </view> -->
       <view class="pn" >
       <view class="headphoto"><image src="{{userInfo.avatarUrl}}"></image></view>
       <view class="nickName">{{userInfo.nickName}}</view>
       </view> 
-      <image src="../../images/icon/email.png" class="talk"></image>
+      <!-- <image src="../../images/icon/email.png" class="talk"></image> -->
 
 </view>
 
@@ -40,7 +39,7 @@ wx:if="{{userInfo.nickName}}">
 <view class="footer">
   <view class="chek">
     <block wx:for="{{check}}" wx:key="*this">
-    <view class="tabbarItem"
+    <view class="tabbarItem {{index == currentIndex?'active':''}}"
     data-index="{{index}}" 
     bindtap="change"
     >{{item}}
@@ -52,7 +51,6 @@ wx:if="{{userInfo.nickName}}">
   </view>
 
   <swiper class="photobox" current="{{currentIndex}}" bindchange="curChange">
-
   <swiper-item class="dongtai">
     <scroll-view scroll-y="true" class="bottomCon">
       <mineList myList="{{myList}}"/>

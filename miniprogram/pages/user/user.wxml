@@ -1,4 +1,5 @@
-<view class="contain" style="background:url(../../images/src=http_%2F%2Fwww.heiguang.com%2Fuploadfile%2F2016%2F0705%2F20160705094125264.jpg&refer=http_%2F%2Fwww.heiguang.jfif)">
+<view class="contain">
+  <image src="{{backgroundImg}}" class="backImg" mode="widhtFix"></image>
   <view class="follow simg" bindtap="follow">
     <image src="{{isfollow?followUrl:nofollowUrl}}"></image>
   </view>
@@ -24,7 +25,7 @@
 
 <view class="Item">
   <view class="itemList" bindtap="goFollowList" data-follow = "{{userList.follow}}"><view>{{follow.length}}</view><view>关注</view></view>
-  <view class="itemList"><view>{{like.length}}</view><view>点赞</view></view>
+  <view class="itemList" bindtap="goLike"><view>{{num}}</view><view>点赞</view></view>
   <view class="itemList" bindtap="gobeFollowList" data-beFollow = "{{userList.beFollow}}"><view>{{beFollow.length}}</view><view>粉丝</view></view>
 </view>
 
@@ -56,4 +57,12 @@
   </scroll-view>
 </swiper-item>
 </swiper>
+</view>
+
+<view class="{{black}}"></view>
+<view class="bottomLogin {{animation}}">
+  <view bindtap="delect">
+    <image src="../../images/icon/delect.png" class="delect"></image>
+  </view>
+  <button bindtap="getUserinfo" class="loginButton">授权登录</button>
 </view>

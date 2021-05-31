@@ -15,7 +15,10 @@ Page({
     likeUrl:"../../images/icon/like1.png",
     nolikeUrl:"../../images/icon/like.png",
     islike:false,
-    islikeArr:[]
+    islikeArr:[],
+    talkHeadphoto:"../../images/icon/noLogin.png",
+    animation:'',
+    black:''
   },
 
   //预览图片
@@ -33,9 +36,24 @@ Page({
     })
   },
   
-  islike(){
+  delect(){
     this.setData({
-      islike:!this.data.islike
+      animation:'',
+      black:''
+    })
+  },
+
+  islike(){
+    if(openId == ''){
+      this.setData({
+        animation:'animation',
+        black:'black'
+      })
+      return
+    }
+
+    this.setData({
+      islike:!this.data.islike,
     })
 
     let like = this.data.islike
@@ -69,7 +87,60 @@ Page({
 
   },
 
+    getUserinfo(e){
+    wx.getUserProfile({
+      desc: '获取用户信息',
+      success: (res) => {   
+        const userInfo = res.userInfo
+        wx.setStorageSync('userInfo', userInfo)
+
+        const province = wx.getStorageSync('province')
+        const city = wx.getStorageSync('city')
+        this.setData({
+          userInfo,
+          animation:'',
+          black:''
+        })
+        this.goLogin()
+
+        //向数据库增添用户
+      wx.cloud.callFunction({
+      name:"userList",
+      data:{
+        $url:"getUserinfo",
+        nickName:this.data.userInfo.nickName,
+        avatarUrl:this.data.userInfo.avatarUrl,
+        province,
+        city
+      }
+      }).then(res => {
+        wx.setStorageSync('openId', res.result.data.openId)
+        openId = wx.getStorageSync('openId')
+        this.onReady()
+      })
+      }
+    })
+  },
+
+  //完善资料
+  goLogin(){
+    const headphoto = this.data.userInfo.avatarUrl
+    const name = this.data.userInfo.nickName
+    wx.navigateTo({
+    url: `/pages/login/login?nickName=${name}&photo=${headphoto}`
+    })
+  },
+
+  //评论
   send(e){
+    if(openId == ''){
+      this.setData({
+        animation:'animation',
+        black:'black'
+      })
+      return
+    }
+    
     wx.showLoading({
       title: '正在发送',
     })
@@ -151,8 +222,34 @@ Page({
         talkHeadphoto:userInfo.avatarUrl,
       })
 
-      
       wx.hideLoading()
+    })
+  },
+
+  //删除此列表
+  delectDetail(e){
+    wx.showModal({
+      title: '是否要删除',
+      icon:"none",
+      success:(res)=>{
+        if (res.confirm) {
+          wx.cloud.callFunction({
+            name:"active",
+            data:{
+              $url:"delectActive",
+              id:e.currentTarget.dataset.id
+            }
+          })
+          wx.reLaunch({
+            url: '/pages/mphoto/mphoto',
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      },
+      fail:()=>{
+        // wx.hideToast()
+      }
     })
   },
 
@@ -160,12 +257,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     userInfo = wx.getStorageSync('userInfo')
     moreUserinfo = wx.getStorageSync('moreUserinfo')
     openId = wx.getStorageSync('openId')
     id = options.id
-
+    this.setData({
+      openId
+    })
     this.loadDetail()
 
   },

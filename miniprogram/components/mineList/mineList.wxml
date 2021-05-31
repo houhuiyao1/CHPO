@@ -1,5 +1,8 @@
 <block wx:for="{{myList}}" wx:key="_id">
     <view class="imgList"  data-id = "{{item._id}}" bindtap="app">
+        <view class="labelBox">
+            <view class="label"  wx:for="{{item.label}}" wx:key="index">#{{item}}</view>
+        </view>
         <image src="{{item.img[0]}}" class="imglist" mode="aspectFill"></image>
         <view class="content">{{item.content}}</view>
     </view>  
@@ -7,6 +10,9 @@
 
 <block wx:for="{{rightList}}" wx:key="_id">
     <view class="imgList" data-id = "{{item._id}}" bindtap="act">
+        <view class="labelBox">
+            <view class="label"  wx:for="{{item.label}}" wx:key="index">#{{item}}</view>
+        </view>
         <image src="{{item.img[0]}}" class="imglist" mode="aspectFill"></image>
         <view class="content">{{item.content}}</view>
     </view>  
@@ -14,13 +20,16 @@
 
 <block wx:for="{{s_leftList}}" wx:key="_id">
     <view class="imgList" data-id = "{{item._id}}" bindtap="app">
+        <view class="labelBox">
+            <view class="label"  wx:for="{{item.label}}" wx:key="index">#{{item}}</view>
+        </view>
         <image src="{{item.img[0]}}" class="imglist" mode="aspectFill"></image>
         <view class="s_content">{{item.content}}</view>
         <view class="footer">
             <image src="{{item.userInfo.avatarUrl}}" class="head"></image>
             <view class="info">
                 <view>{{item.userInfo.nickName}}</view>
-                <view style="font-size:20rpx">{{item.moreUserinfo.status}} · {{item.moreUserinfo.school}}</view>
+                <view style="font-size:20rpx">{{item.moreUserinfo.status}} · {{item.province}}{{item.moreUserinfo.school}}</view>
             </view>
         </view>
     </view>  
@@ -28,13 +37,16 @@
 
 <block wx:for="{{s_centerList}}" wx:key="_id">
     <view class="imgList" data-id = "{{item._id}}" bindtap="act">
+        <view class="labelBox">
+            <view class="label"  wx:for="{{item.label}}" wx:key="index">#{{item}}</view>
+        </view>
         <image src="{{item.img[0]}}" class="imglist" mode="aspectFill"></image>
         <view class="s_content">{{item.content}}</view>
         <view class="footer">
             <image src="{{item.userInfo.avatarUrl}}" class="head"></image>
             <view class="info">
                 <view>{{item.userInfo.nickName}}</view>
-                <view style="font-size:20rpx">{{item.moreUserinfo.status}} · {{item.moreUserinfo.school}}</view>
+                <view style="font-size:20rpx">{{item.moreUserinfo.status}} · {{item.province}}{{item.moreUserinfo.school}}</view>
             </view>
         </view>
     </view>  

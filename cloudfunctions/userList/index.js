@@ -35,13 +35,17 @@ exports.main = async (event, context) => {
   })
 
   app.router('getUserinfo',async(ctx,next) => {
-    await db.collection("userlist").add({
-      data:{
-        "nickName":event.nickName,
-        "avatarUrl":event.avatarUrl,
-        "openid": event.userInfo.openId
-      }
-    })
+      await db.collection("userlist").add({
+        data:{
+          "nickName":event.nickName,
+          "avatarUrl":event.avatarUrl,
+          "openid": event.userInfo.openId,
+          "province":event.province,
+          "city":event.city,
+          "follow":[],
+          "beFollow":[],
+        }
+      })
   })
 
   app.router('moreUserinfo',async(ctx,next) => {
@@ -51,9 +55,18 @@ exports.main = async (event, context) => {
       data:{
         "status":event.status,
         "school":event.school,
-        "introduce":event.introduce,
-        "follow":[],
-        "beFollow":[],
+        "introduce":event.introduce
+      }
+    })
+  })
+
+  app.router("backImg",async(ctx,next)=>{
+    await db.collection('userlist').where({
+      openid:event.openId
+    })
+    .update({
+      data:{
+        backgroundImg:event.img
       }
     })
   })

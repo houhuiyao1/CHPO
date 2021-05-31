@@ -1,4 +1,5 @@
-// pages/login/login.js
+var QQMapWX = require('../../lib/qqmap-wx-jssdk.js')
+var qqmapsdk
 const MAX_num = 50
 let openId = ''
 Page({
@@ -32,6 +33,10 @@ Page({
     this.setData({
       userInfo:options
     })
+
+    qqmapsdk = new QQMapWX({
+      key: 'UZLBZ-WVLHR-ZDSWI-WXLYJ-YVT55-YQFJT'
+  });
   },
 
   getschool(e){
@@ -74,14 +79,16 @@ Page({
       nickName
     })
 
+    console.log(moreUserinfo);
+    
     wx.cloud.callFunction({
       name:"userList",
       data:{
         $url:"moreUserinfo",
         openId,
-        "status":m.status,
-        "school":m.school,
-        "introduce":m.introduce
+        "status":moreUserinfo.status,
+        "school":moreUserinfo.school,
+        "introduce":moreUserinfo.introduce
       }
     })
 
@@ -103,7 +110,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    // var _this = this;
+    // //调用获取城市列表接口
+    // qqmapsdk.getCityList({
+    //   success: function(res) {//成功后的回调
+    //     console.log(res);
+    //     console.log('省份数据：', res.result[0]); //打印省份数据
+    //     console.log('城市数据：', res.result[1]); //打印城市数据
+    //     console.log('区县数据：', res.result[2]); //打印区县数据
+    //   },
+    //   fail: function(error) {
+    //     console.error(error);
+    //   },
+    //   complete: function(res) {
+    //     console.log(res);
+    //   }
+    // });
   },
 
   /**

@@ -8,7 +8,8 @@ Page({
   data: {
     appiontmentList:[],
     likeArr:[],
-    likeArrcount:[]
+    likeArrcount:[],
+    commentCount:[]
   },
 
   //去搜索页面
@@ -27,7 +28,7 @@ Page({
   },
 
 
-  loadAppiontmentList(start=0,count=10){
+  loadAppiontmentList(start=0,count=4){
     wx.showLoading({
       title: '拼命加载中',
     })
@@ -75,7 +76,9 @@ Page({
       let arr = res.result.data
       let likeArr= []
       let likeArrcount = []
+      let commentCount = []
       for(let i = 0;i < arr.length;i++){
+        commentCount.push(arr[i].comment.length)
         res.result.data[i].createTime = res.result.data[i].createTime.substring(0,10)
         likeArrcount.push(arr[i].like.length)
           if(arr[i].like.indexOf(openId) < 0){
@@ -86,7 +89,8 @@ Page({
       }   
       this.setData({
         likeArr,
-        likeArrcount
+        likeArrcount,
+        commentCount
       })  
     })
   },

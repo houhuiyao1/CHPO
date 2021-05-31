@@ -2,15 +2,32 @@ page{
   background-color: white;
 }
 
-.found{
-  overflow: hidden;
-  margin: 40rpx 40rpx 0 40rpx;
+.top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.foundText{
-  float: left;
-  font-size: 46rpx;
-  font-weight: 700;
+.local{
+  display: flex;
+  align-items: center;
+}
+
+.localImg{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 10rpx;
+}
+
+.localText{
+  font-size: 28rpx;
+  overflow: hidden;
+  width: 25vw;
+  text-overflow: -o-ellipsis-lastline;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .foundIcon{
@@ -18,9 +35,9 @@ page{
 }
 
 .search{
-  width: 90vw;
+  width: 60vw;
   height: 70rpx;
-  margin: 20rpx auto;
+  margin: 15rpx 20rpx 0 0;
   border: 2rpx rgb(220, 224, 223) solid;
   display: flex;
   align-items: center;
@@ -39,10 +56,11 @@ page{
 
 .tabbar{
   display: flex;
+  clear: both;
 }
 
 .tabbar .tabbarItem{
-  margin: 10rpx;
+  margin: 0 10rpx 10rpx 10rpx;
   padding: 10rpx;
   position: relative;
   display: flex;
@@ -67,7 +85,6 @@ page{
   width: 100vw;
   overflow: hidden;
   display: flex;
-  margin-left: 10rpx;
 }
 
 .photograth{
@@ -130,14 +147,29 @@ page{
   width: 110rpx;
   height: 50rpx;
   float: right;
-  font-size: 35rpx;
+  font-size: 28rpx;
   color: #2CD18A;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.none{
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 300rpx;
+  left: 25vw;
+}
 
+.noneImg{
+  width: 80rpx;
+  height: 80rpx;
+}
 
-
+.noneText{
+  font-size: 30rpx;
+}
 

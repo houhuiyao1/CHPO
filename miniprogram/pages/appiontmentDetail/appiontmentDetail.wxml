@@ -5,13 +5,16 @@ indicator-active-color="#2CD18A"
 circular="true"
 autoplay="true">
   <swiper-item wx:for="{{list[0].img}}" wx:key="*this">
-    <image src="{{item}}" mode="center" bindtap="previewImage" data-imagesrc="{{item}}"></image>
+    <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-imagesrc="{{item}}"></image>
   </swiper-item>
 </swiper>
 
 <view class="contentContainer">
   
   <view class="userInfo">
+    <view class="gabi" bindtap="delectDetail" data-id="{{list[0]._id}}" wx:if="{{list[0]._openid==openId}}">
+      <image src="../../images/icon/delect1.png" class="gabiimage"></image>
+    </view>
     <view class="like" bindtap="islike">
       <image src="{{islike?likeUrl:nolikeUrl}}" class="likeimage"></image>
     </view>
@@ -25,6 +28,8 @@ autoplay="true">
   <view class="content">
     {{list[0].content}}
   </view>
+
+  <view wx:for="{{list[0].label}}" wx:key="index" class="label">#{{item}}</view>
 
   <view class="send">
     <view class="ava"><image src="{{talkHeadphoto}}"></image></view>
@@ -53,3 +58,12 @@ autoplay="true">
   <view class="time">{{item.createTime}}</view>
 </block>
 </view>
+
+<view class="{{black}}"></view>
+<view class="bottomLogin {{animation}}">
+  <view bindtap="delect">
+    <image src="../../images/icon/delect.png" class="delect"></image>
+  </view>
+  <button bindtap="getUserinfo" class="loginButton">授权登录</button>
+</view>
+

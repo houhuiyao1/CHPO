@@ -157,6 +157,12 @@ exports.main = async (event, context) => {
     ctx.body = searchList
   })
 
+  app.router("delectAppiontment",async(ctx,next)=>[
+    await db.collection("appiontment").where({
+      _id:event.id
+    }).remove()
+  ])
+
   return app.serve()
 
 }

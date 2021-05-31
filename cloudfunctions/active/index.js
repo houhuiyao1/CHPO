@@ -133,6 +133,12 @@ exports.main = async (event, context) => {
     ctx.body = searchList
   })
 
+  app.router("delectActive",async(ctx,next)=>[
+    await db.collection("active").where({
+      _id:event.id
+    }).remove()
+  ])
+
   return app.serve()
 
 }

@@ -1,7 +1,15 @@
-<view class="search" bindtap="goSearch">
-  <view class="search-text">搜索</view>
-  <icon type="search" size="30" color="" class="foundIcon"></icon>
+<view class="top">
+  <view class="local" bindtap="getLocal">
+    <image src="../../images/icon/local1.png" class="localImg"></image>
+    <view class="localText" wx:if="{{province}}">{{province}}·{{city}}</view>
+  </view>
+  
+  <view class="search" bindtap="goSearch">
+    <view class="search-text">搜索</view>
+    <icon type="search" size="30" color="" class="foundIcon"></icon>
+  </view>
 </view>
+
 
 <!-- <view class="found" bindtap="goSearch">
   <view class="foundText">Found</view>
@@ -25,9 +33,9 @@
 <swiper class="photobox" current="{{currentIndex}}" bindchange="curChange" >
   <swiper-item class="hot">
     <view class="photograth">
-      <view class="col"></view>
+      <!-- <view class="col"></view> -->
       <view class="pg">摄影师</view>
-      <view class="more" bindtap="morepg">>></view>
+      <!-- <view class="more" bindtap="morepg">>></view> -->
     </view>
 
     <scroll-view class="box" scroll-x="true" enable-flex="true" wx:if="{{photograph.length !== 0}}">
@@ -44,12 +52,16 @@
     <view  wx:if="{{photograph.length == 0}}" class="gophoto">快去成为第一位摄影师吧！</view>
     
     <view class="photograth">
-      <view class="col"></view>
+      <!-- <view class="col"></view> -->
       <view class="pg">约拍列表</view>
-      <view class="more" bindtap="moreph">>></view>
+      <!-- <view class="more" bindtap="moreph">>></view> -->
     </view>
 
-    <scroll-view class="photoBox" scroll-y="true" enable-flex="true">
+    <scroll-view class="photoBox" scroll-y="true" enable-flex="true" bindscrolltolower="loadNext">
+      <view class="none" wx:if="{{list.length===0}}">
+        <image src="../../images/icon/none1.png" class="noneImg"></image>
+        <view class="noneText">暂无约拍列表，快去发布吧</view>
+      </view>
         <view class="left together">
           <block wx:for="{{list}}" wx:if="{{index%2 == 0}}" wx:key="_id">
             <photoList list = "{{list}}" 
@@ -78,8 +90,9 @@
   </swiper-item>
   <swiper-item class="close">
     <view class="photograth">
-      <view class="col"></view>
-      摄影师
+      <!-- <view class="col"></view> -->
+      <view class="pg">摄影师</view>
+      <!-- <view class="more" bindtap="morepg">>></view> -->
     </view>
 
     <scroll-view class="box" scroll-x="true" enable-flex="true" wx:if="{{photograph.length !== 0}}">
@@ -93,11 +106,16 @@
 
     <view  wx:if="{{photograph.length == 0}}" class="gophoto">快去成为第一位摄影师吧！</view>
     
-    <view class="list">
-      <view class="col"></view>
-      约拍列表
+    <view class="photograth">
+      <!-- <view class="col"></view> -->
+      <view class="pg">约拍列表</view>
+      <!-- <view class="more" bindtap="moreph">>></view> -->
     </view>
-     <scroll-view class="photoBox" scroll-y="true" enable-flex="true">
+     <scroll-view class="photoBox" scroll-y="true" enable-flex="true" bindscrolltolower="loadschoolNext">
+      <view class="none" wx:if="{{schoollist.length===0}}">
+        <image src="../../images/icon/none1.png" class="noneImg"></image>
+        <view class="noneText">暂无约拍列表，快去发布吧</view>
+      </view>
         <view class="left together">
           <block wx:for="{{schoollist}}" wx:if="{{index%2 == 0}}" wx:key="_id">
             <schoolPhotoList schoollist = "{{schoollist}}" 
