@@ -45,7 +45,14 @@ Page({
             filePath:item,
             success:(res)=>{ 
               fileId=res.fileID
-              resolve(fileId)
+              wx.cloud.getTempFileURL({
+                fileList: [{
+                  fileID: res.fileID,
+                }]
+              }).then(res => {
+                resolve(res.fileList[0].tempFileURL)
+              })
+              
             },
             fail:(err)=>{
               console.log(err); 

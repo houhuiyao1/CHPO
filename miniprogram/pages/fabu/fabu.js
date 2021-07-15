@@ -151,16 +151,25 @@ Page({
 
     let promiseArr = []
     let fileId = []
+    let firstImg = ''
     for(let i = 0,len = this.data.imageList.length;i < len;i++){
       let p = new Promise((resolve,reject) => {
       let item = this.data.imageList[i]
       let suffix = /\.\w+$/.exec(item)[0]
       wx.cloud.uploadFile({
-        cloudPath:`active/${Date.now()}-${Math.random()*1000}${suffix}`,
+        cloudPath:`appiontment/${Date.now()}-${Math.random()*1000}${suffix}`,
         filePath:item,
         success:(res)=>{ 
           fileId=fileId.concat(res.fileID)
-          resolve()
+          wx.cloud.getTempFileURL({
+            fileList: [{
+              fileID: fileId[0],
+            }]
+          }).then(res => {
+            firstImg = res.fileList[0].tempFileURL
+            resolve()
+          })
+          
         },
         fail:(err)=>{
           console.log(err); 
@@ -183,6 +192,7 @@ Page({
           like:[],
           comment:[],
           label,
+          firstImg,
           islike:false
         }
       }).then((res)=>{
@@ -209,6 +219,7 @@ Page({
 
     let promiseArr = []
     let fileId = []
+    let firstImg = ''
     for(let i = 0,len = this.data.imageList.length;i < len;i++){
       let p = new Promise((resolve,reject) => {
       let item = this.data.imageList[i]
@@ -218,7 +229,14 @@ Page({
         filePath:item,
         success:(res)=>{
           fileId=fileId.concat(res.fileID)
-          resolve()
+          wx.cloud.getTempFileURL({
+            fileList: [{
+              fileID: fileId[0],
+            }]
+          }).then(res => {
+            firstImg = res.fileList[0].tempFileURL
+            resolve()
+          })
         },
         fail:(err)=>{
           console.log(err); 
@@ -229,6 +247,8 @@ Page({
       promiseArr.push(p)      
     }
     Promise.all(promiseArr).then((res) => {
+      console.log(fileId);
+      
       db.collection('active').add({
         data:{
           userInfo:userInfo,
@@ -241,6 +261,7 @@ Page({
           like:[],
           comment:[],
           label,
+          firstImg,
           islike:false
         }
       }).then((res)=>{
